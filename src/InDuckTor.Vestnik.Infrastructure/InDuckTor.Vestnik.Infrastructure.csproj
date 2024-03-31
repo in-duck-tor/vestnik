@@ -8,9 +8,14 @@
 
     <ItemGroup>
       <PackageReference Include="Confluent.SchemaRegistry.Serdes.Protobuf" Version="2.3.0" />
-      <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.0.0" />
-      <PackageReference Include="InDuckTor.Shared.Kafka" Version="1.2.0" />
+      <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.1.0" />
+      <PackageReference Include="InDuckTor.Shared" Version="2.2.2" />
+      <PackageReference Include="InDuckTor.Shared.Kafka" Version="1.2.1" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\InDuckTor.Vestnik.Domain\InDuckTor.Vestnik.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,11 @@
+using System.Reflection;
 using InDuckTor.Shared.Security.Http;
 using InDuckTor.Shared.Security.Jwt;
+using InDuckTor.Shared.Strategies;
 using InDuckTor.Vestnik.Api.Configuration;
 using InDuckTor.Vestnik.Api.Endpoints;
 using InDuckTor.Vestnik.Api.Services;
+using InDuckTor.Vestnik.Features.Account;
 using InDuckTor.Vestnik.Infrastructure.Kafka;
 using Microsoft.AspNetCore.SignalR;
 
@@ -18,6 +21,10 @@ services
     .AddSignalR();
 
 services.AddVestnikKafka(configuration.GetSection("Kafka"));
+
+services.AddHttpClients(configuration.GetSection("HttpClients"));
+
+services.AddStrategiesFrom(Assembly.GetAssembly(typeof(AccountEventsHandler))!);
 
 services.AddEndpointsApiExplorer();
 services.AddVestnikSwaggerGen();

@@ -7,14 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="LazyCache" Version="2.4.0" />
+        <PackageReference Include="SignalRSwaggerGen.Core" Version="1.1.0" />
         <Reference Include="Microsoft.Extensions.Logging.Abstractions">
             <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.3\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
         </Reference>
-        <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.0.0"/>
-        <PackageReference Include="InDuckTor.Shared.Kafka" Version="1.2.0"/>
+        <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.1.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\InDuckTor.Account.HttpClient\InDuckTor.Account.HttpClient.csproj" />
       <ProjectReference Include="..\InDuckTor.Vestnik.Infrastructure\InDuckTor.Vestnik.Infrastructure.csproj" />
     </ItemGroup>
 

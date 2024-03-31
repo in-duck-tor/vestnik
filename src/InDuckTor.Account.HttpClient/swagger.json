@@ -1,0 +1,990 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "InDuckTor.Account.WebApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/bank": {
+      "get": {
+        "tags": [
+          "BankInfo"
+        ],
+        "description": "Получение информации об известных банках",
+        "operationId": "bank",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/currency": {
+      "get": {
+        "tags": [
+          "BankInfo"
+        ],
+        "description": "Получение информации об известных валютах",
+        "operationId": "currency",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrencyInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Создать счёт",
+        "operationId": "CreateAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/search": {
+      "put": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Поиск по всем счётам",
+        "operationId": "search",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsSearchParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionSearchResult`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/{accountNumber}/transaction": {
+      "get": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Планируется переход на Keyset Pagination https://struchkov.dev/blog/ru/seek-method-or-keyset-pagination",
+        "operationId": "GetAccountTransactions",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/transaction": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Начать трансакцию между счётами",
+        "operationId": "OpenTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenTransactionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/transaction/{transactionId}/commit": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Зафиксировать трансакцию между счётами",
+        "operationId": "commit",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/transaction/{transactionId}/cancel": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Отменить трансакцию между счётами",
+        "operationId": "cancel",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/account": {
+      "get": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Получить все счёта текущего пользователя",
+        "operationId": "accountAll",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentAccountDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Открыть новый счёт для текущего пользователя",
+        "operationId": "account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenPaymentAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v1/account/{accountNumber}/transaction": {
+      "get": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Планируется переход на Keyset Pagination https://struchkov.dev/blog/ru/seek-method-or-keyset-pagination",
+        "operationId": "transactionAll",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Счёт не найден"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/account/transaction": {
+      "post": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Совершить трансакцию по счёту текущего пользователя",
+        "operationId": "transaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MakeTransactionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/account/{accountNumber}/freeze": {
+      "put": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Запрос пользователя заморозить счёт",
+        "operationId": "freeze",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/account/{accountNumber}/unfreeze": {
+      "put": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Запрос пользователя разморозить счёт",
+        "operationId": "unfreeze",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/account/{accountNumber}/close": {
+      "post": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Запрос пользователя закрыть счёт",
+        "operationId": "close",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AccountNumber"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountAction": {
+        "type": "string",
+        "enum": [
+          "deposit",
+          "withdraw",
+          "freeze",
+          "close",
+          "read"
+        ]
+      },
+      "AccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "Номер счёта",
+            "nullable": true
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "Трёхбуквенный алфавитный код Валюты (ISO 4217)",
+            "nullable": true
+          },
+          "bankCode": {
+            "$ref": "#/components/schemas/BankCode"
+          },
+          "ownerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "description": "<b>ДЕНЬГИ</b>",
+            "format": "double"
+          },
+          "state": {
+            "$ref": "#/components/schemas/AccountState"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountType"
+          },
+          "customComment": {
+            "type": "string",
+            "description": "Комментарий к счёту оставленный при создании",
+            "nullable": true
+          },
+          "grantedUsers": {
+            "type": "array",
+            "description": "Особые права пользователей на действие со счётом",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AccountDto.GrantedUser"
+            }
+          }
+        }
+      },
+      "AccountDto.GrantedUser": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AccountAction"
+            }
+          }
+        }
+      },
+      "AccountNumber": {
+        "type": "string",
+        "description": "Номер счёта из 20 цифр",
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AccountState": {
+        "type": "string",
+        "enum": [
+          "active",
+          "closed",
+          "frozen"
+        ]
+      },
+      "AccountType": {
+        "type": "string",
+        "enum": [
+          "payment",
+          "loan",
+          "cash_register"
+        ]
+      },
+      "AccountsSearchParams": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ownerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "accountState": {
+            "$ref": "#/components/schemas/AccountState"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/AccountType"
+          },
+          "take": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "skip": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "BankCode": {
+        "type": "string",
+        "description": "БИК. 9-ти значный уникальный код банка",
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isExternal": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        }
+      },
+      "BankInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "bankCode": {
+            "$ref": "#/components/schemas/BankCode"
+          },
+          "name": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          }
+        }
+      },
+      "CollectionSearchResult`1": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Сколько всего элементов подходит под выборку",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "description": "Элементы текущеё под-выборки",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AccountDto"
+            }
+          }
+        }
+      },
+      "CreateAccountRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "forUserId": {
+            "type": "integer",
+            "description": "Пользователь для которого создаётся счёт, владелец",
+            "format": "int32"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/AccountType"
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "plannedExpiration": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "customComment": {
+            "type": "string",
+            "description": "Комментарий\\записка назначении счёта при создании",
+            "nullable": true
+          }
+        }
+      },
+      "CreateAccountResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "accountNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CurrencyInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Трёхбуквенный алфавитный код ISO 4217",
+            "nullable": true
+          },
+          "numericCode": {
+            "type": "integer",
+            "description": "Трёхзначный цифровой код ISO 4217",
+            "format": "int32"
+          },
+          "exchangeRate": {
+            "type": "number",
+            "description": "Курс валюты к рублю",
+            "format": "double"
+          }
+        }
+      },
+      "MakeTransactionResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transactionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TransactionStatus"
+          }
+        }
+      },
+      "NewTransactionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "<b>ДЕНЬГИ</b>",
+            "format": "double"
+          },
+          "depositOn": {
+            "$ref": "#/components/schemas/NewTransactionRequest.Target"
+          },
+          "withdrawFrom": {
+            "$ref": "#/components/schemas/NewTransactionRequest.Target"
+          }
+        }
+      },
+      "NewTransactionRequest.Target": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "accountNumber": {
+            "$ref": "#/components/schemas/AccountNumber"
+          },
+          "bankCode": {
+            "$ref": "#/components/schemas/BankCode"
+          }
+        }
+      },
+      "OpenPaymentAccountRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "currencyCode": {
+            "type": "string",
+            "description": "Трёхбуквенный алфавитный код Валюты (ISO 4217)",
+            "nullable": true
+          },
+          "customComment": {
+            "type": "string",
+            "description": "Комментарий к счёту который может оставить создатель",
+            "nullable": true
+          }
+        }
+      },
+      "OpenTransactionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "newTransaction": {
+            "$ref": "#/components/schemas/NewTransactionRequest"
+          },
+          "executeImmediate": {
+            "type": "boolean",
+            "description": "Выполнить трансакцию сразу при получении запроса или ожидать команды на завершение"
+          },
+          "requestedTransactionTtl": {
+            "type": "number",
+            "description": "Запрашиваемое максимальное время жизни трансакции в секундах",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "OpenTransactionResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transactionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TransactionStatus"
+          },
+          "autoCloseAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PaymentAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "Номер счёта",
+            "nullable": true
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "Трёхбуквенный алфавитный код Валюты (ISO 4217)",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "description": "<b>ДЕНЬГИ</b>",
+            "format": "double"
+          },
+          "state": {
+            "$ref": "#/components/schemas/AccountState"
+          },
+          "customComment": {
+            "type": "string",
+            "description": "Комментарий к счёту оставленный при создании",
+            "nullable": true
+          }
+        }
+      },
+      "TransactionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TransactionStatus"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "depositOn": {
+            "$ref": "#/components/schemas/TransactionDto.Target"
+          },
+          "withdrawFrom": {
+            "$ref": "#/components/schemas/TransactionDto.Target"
+          }
+        }
+      },
+      "TransactionDto.Target": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "<b>ДЕНЬГИ</b>",
+            "format": "double"
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "Трёхбуквенный алфавитный код Валюты (ISO 4217)",
+            "nullable": true
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "bankCode": {
+            "$ref": "#/components/schemas/BankCode"
+          },
+          "bankName": {
+            "type": "string",
+            "description": "Имя банка",
+            "nullable": true
+          }
+        }
+      },
+      "TransactionStatus": {
+        "type": "string",
+        "enum": [
+          "creating",
+          "pending",
+          "committed",
+          "canceled"
+        ]
+      },
+      "TransactionType": {
+        "type": "string",
+        "enum": [
+          "withdraw",
+          "deposit",
+          "transfer",
+          "transfer_to_external",
+          "transfer_from_external"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "auth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "auth": []
+    }
+  ]
+}

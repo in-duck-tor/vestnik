@@ -8,15 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Confluent.SchemaRegistry.Serdes.Protobuf" Version="2.3.0" />
-    <PackageReference Include="InDuckTor.Shared" Version="2.1.4" />
     <PackageReference Include="InDuckTor.Shared.Security.Http" Version="2.0.0" />
     <PackageReference Include="InDuckTor.Shared.Security.Jwt" Version="2.0.3" />
+    <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
     <PackageReference Include="SignalRSwaggerGen" Version="4.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InDuckTor.Account.HttpClient\InDuckTor.Account.HttpClient.csproj" />
     <ProjectReference Include="..\InDuckTor.Vestnik.Features\InDuckTor.Vestnik.Features.csproj" />
     <ProjectReference Include="..\InDuckTor.Vestnik.Infrastructure\InDuckTor.Vestnik.Infrastructure.csproj" />
   </ItemGroup>

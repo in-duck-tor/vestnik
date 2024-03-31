@@ -3,6 +3,7 @@ using Confluent.Kafka.SyncOverAsync;
 using Confluent.SchemaRegistry.Serdes;
 using InDuckTor.Account.Contracts.Public;
 using InDuckTor.Shared.Kafka;
+using InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

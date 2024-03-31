@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="14.0.7" />
+      <PackageReference Include="NSwag.MSBuild" Version="14.0.7">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <OpenApiReference Include="swagger.json" SourceUrl="http://89.19.214.8/swagger/docs/v1/account"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Generated\" />
+    </ItemGroup>
+    <Target Name="NSwag" BeforeTargets="Build">
+        <!--        <Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) aspnetcore2openapi /project:$(SolutionDir)src\InDuckTor.Account.WebApi\InDuckTor.Account.WebApi.csproj /output:swagger.json"/>-->
+        <!--        <Exec Command="$(NSwagExe_Net80) openapi2csclient /input:swagger.json /output:Scripts/AccountHttpClient.cs"/>-->
+        <Exec Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
+    </Target>
+
+</Project>

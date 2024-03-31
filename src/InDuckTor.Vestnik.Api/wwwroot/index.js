@@ -1,9 +1,13 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/api/v1/ws/my-hub", {
+    .withUrl("/api/v1/ws/vestnik/account-events", {
         accessTokenFactory: () => document.getElementById("accessTokenArea").value
     })
     .configureLogging(signalR.LogLevel.Information)
     .build();
+
+// connection.on("method", (data) => {
+//     console.log(data);
+// });
 
 async function start() {
     try {

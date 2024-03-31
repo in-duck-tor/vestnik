@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InDuckTor.Vestnik.Features"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InDuckTor.Vestnik.Infrastructure", "src\InDuckTor.Vestnik.Infrastructure\InDuckTor.Vestnik.Infrastructure.csproj", "{9816F1AB-2462-498B-B8CD-17B3198A2D22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InDuckTor.Vestnik.Domain", "src\InDuckTor.Vestnik.Domain\InDuckTor.Vestnik.Domain.csproj", "{B45F17CC-C2F3-4193-97E3-5422945E06D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InDuckTor.Account.HttpClient", "src\InDuckTor.Account.HttpClient\InDuckTor.Account.HttpClient.csproj", "{844A48A6-C594-4D71-9CF9-078254502CF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +36,20 @@ Global
 		{9816F1AB-2462-498B-B8CD-17B3198A2D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9816F1AB-2462-498B-B8CD-17B3198A2D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9816F1AB-2462-498B-B8CD-17B3198A2D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B45F17CC-C2F3-4193-97E3-5422945E06D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B45F17CC-C2F3-4193-97E3-5422945E06D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B45F17CC-C2F3-4193-97E3-5422945E06D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B45F17CC-C2F3-4193-97E3-5422945E06D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844A48A6-C594-4D71-9CF9-078254502CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844A48A6-C594-4D71-9CF9-078254502CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844A48A6-C594-4D71-9CF9-078254502CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844A48A6-C594-4D71-9CF9-078254502CF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F79A67D1-5909-4286-AAD9-5270AE24433D} = {2291CB33-07F0-4814-A5F4-B05BD60A9D7A}
 		{43A3834D-EE5B-40FF-8741-6F31F02DEDE4} = {2291CB33-07F0-4814-A5F4-B05BD60A9D7A}
 		{9816F1AB-2462-498B-B8CD-17B3198A2D22} = {2291CB33-07F0-4814-A5F4-B05BD60A9D7A}
+		{B45F17CC-C2F3-4193-97E3-5422945E06D3} = {2291CB33-07F0-4814-A5F4-B05BD60A9D7A}
+		{844A48A6-C594-4D71-9CF9-078254502CF8} = {2291CB33-07F0-4814-A5F4-B05BD60A9D7A}
 	EndGlobalSection
 EndGlobal
