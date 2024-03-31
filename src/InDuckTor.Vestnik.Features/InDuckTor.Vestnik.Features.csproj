@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+            <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.3\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+        </Reference>
+        <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.0.0"/>
+        <PackageReference Include="InDuckTor.Shared.Kafka" Version="1.2.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\InDuckTor.Vestnik.Infrastructure\InDuckTor.Vestnik.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

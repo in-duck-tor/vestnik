@@ -1,28 +1,42 @@
-using InDuckTor.Shared.Kafka;
+using InDuckTor.Shared.Security.Http;
+using InDuckTor.Shared.Security.Jwt;
 using InDuckTor.Vestnik.Api.Configuration;
 using InDuckTor.Vestnik.Api.Endpoints;
+using InDuckTor.Vestnik.Api.Services;
+using InDuckTor.Vestnik.Infrastructure.Kafka;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+var configuration = builder.Configuration;
 
-services.AddSignalR();
+services
+    .AddInDuckTorAuthentication(configuration.GetSection(nameof(JwtSettings)))
+    .AddInDuckTorSecurity();
+services
+    .AddSingleton<IUserIdProvider, InDuckTorUserIdProvider>()
+    .AddSignalR();
+
+services.AddVestnikKafka(configuration.GetSection("Kafka"));
 
 services.AddEndpointsApiExplorer();
 services.AddVestnikSwaggerGen();
 
-services.AddInDuckTorKafka();
 
 var app = builder.Build();
-
-app.MapGet("/", () => "Hello World!");
 
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseStaticFiles();
 }
 
-app.UseWebSockets();
-app.WebSocketsEndpoints();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseInDuckTorSecurity();
+
+app.AddWebSocketsEndpoints();
 
 app.Run();
