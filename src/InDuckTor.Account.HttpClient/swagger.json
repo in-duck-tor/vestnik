@@ -5,276 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/v1/bank": {
-      "get": {
-        "tags": [
-          "BankInfo"
-        ],
-        "description": "Получение информации об известных банках",
-        "operationId": "bank",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BankInfo"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/bank/currency": {
-      "get": {
-        "tags": [
-          "BankInfo"
-        ],
-        "description": "Получение информации об известных валютах",
-        "operationId": "currency",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CurrencyInfo"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/bank/account": {
-      "post": {
-        "tags": [
-          "BankingAccounts"
-        ],
-        "description": "Создать счёт",
-        "operationId": "CreateAccount",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAccountRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateAccountResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/bank/account/search": {
-      "put": {
-        "tags": [
-          "BankingAccounts"
-        ],
-        "description": "Поиск по всем счётам",
-        "operationId": "search",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AccountsSearchParams"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "403": {
-            "description": "Forbidden"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CollectionSearchResult`1"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/bank/account/{accountNumber}/transaction": {
-      "get": {
-        "tags": [
-          "BankingAccounts"
-        ],
-        "description": "Планируется переход на Keyset Pagination https://struchkov.dev/blog/ru/seek-method-or-keyset-pagination",
-        "operationId": "GetAccountTransactions",
-        "parameters": [
-          {
-            "name": "accountNumber",
-            "in": "path",
-            "style": "simple",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "take",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "style": "form",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "403": {
-            "description": "Forbidden"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TransactionDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/bank/account/transaction": {
-      "post": {
-        "tags": [
-          "BankingAccounts"
-        ],
-        "description": "Начать трансакцию между счётами",
-        "operationId": "OpenTransaction",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OpenTransactionRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OpenTransactionResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/bank/account/transaction/{transactionId}/commit": {
-      "post": {
-        "tags": [
-          "BankingAccounts"
-        ],
-        "description": "Зафиксировать трансакцию между счётами",
-        "operationId": "commit",
-        "parameters": [
-          {
-            "name": "transactionId",
-            "in": "path",
-            "style": "simple",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "204": {
-            "description": "No Content"
-          }
-        }
-      }
-    },
-    "/api/v1/bank/account/transaction/{transactionId}/cancel": {
-      "post": {
-        "tags": [
-          "BankingAccounts"
-        ],
-        "description": "Отменить трансакцию между счётами",
-        "operationId": "cancel",
-        "parameters": [
-          {
-            "name": "transactionId",
-            "in": "path",
-            "style": "simple",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "204": {
-            "description": "No Content"
-          }
-        }
-      }
-    },
     "/api/v1/account": {
       "get": {
         "tags": [
@@ -323,6 +53,68 @@
           },
           "202": {
             "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v1/account/{accountNumber}/close": {
+      "post": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Запрос пользователя закрыть счёт",
+        "operationId": "close",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AccountNumber"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/account/{accountNumber}/freeze": {
+      "put": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Запрос пользователя заморозить счёт",
+        "operationId": "freeze",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -389,6 +181,37 @@
         }
       }
     },
+    "/api/v1/account/{accountNumber}/unfreeze": {
+      "put": {
+        "tags": [
+          "PaymentAccounts"
+        ],
+        "description": "Запрос пользователя разморозить счёт",
+        "operationId": "unfreeze",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/api/v1/account/transaction": {
       "post": {
         "tags": [
@@ -429,75 +252,74 @@
         }
       }
     },
-    "/api/v1/account/{accountNumber}/freeze": {
-      "put": {
+    "/api/v1/bank": {
+      "get": {
         "tags": [
-          "PaymentAccounts"
+          "BankInfo"
         ],
-        "description": "Запрос пользователя заморозить счёт",
-        "operationId": "freeze",
-        "parameters": [
-          {
-            "name": "accountNumber",
-            "in": "path",
-            "style": "simple",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "description": "Получение информации об известных банках",
+        "operationId": "bank",
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankInfo"
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/v1/account/{accountNumber}/unfreeze": {
-      "put": {
-        "tags": [
-          "PaymentAccounts"
-        ],
-        "description": "Запрос пользователя разморозить счёт",
-        "operationId": "unfreeze",
-        "parameters": [
-          {
-            "name": "accountNumber",
-            "in": "path",
-            "style": "simple",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "204": {
-            "description": "No Content"
-          }
-        }
-      }
-    },
-    "/api/v1/account/{accountNumber}/close": {
+    "/api/v1/bank/account": {
       "post": {
         "tags": [
-          "PaymentAccounts"
+          "BankingAccounts"
         ],
-        "description": "Запрос пользователя закрыть счёт",
-        "operationId": "close",
+        "description": "Создать счёт",
+        "operationId": "CreateAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/{accountNumber}/transaction": {
+      "get": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Планируется переход на Keyset Pagination https://struchkov.dev/blog/ru/seek-method-or-keyset-pagination",
+        "operationId": "GetAccountTransactions",
         "parameters": [
           {
             "name": "accountNumber",
@@ -505,19 +327,197 @@
             "style": "simple",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AccountNumber"
+              "type": "string"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found"
-          },
           "403": {
             "description": "Forbidden"
           },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/search": {
+      "put": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Поиск по всем счётам",
+        "operationId": "search",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsSearchParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionSearchResult`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/transaction": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Начать трансакцию между счётами",
+        "operationId": "OpenTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenTransactionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/transaction/{transactionId}/cancel": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Отменить трансакцию между счётами",
+        "operationId": "cancel",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "204": {
             "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/bank/account/transaction/{transactionId}/commit": {
+      "post": {
+        "tags": [
+          "BankingAccounts"
+        ],
+        "description": "Зафиксировать трансакцию между счётами",
+        "operationId": "commit",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/bank/currency": {
+      "get": {
+        "tags": [
+          "BankInfo"
+        ],
+        "description": "Получение информации об известных валютах",
+        "operationId": "currency",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrencyInfo"
+                  }
+                }
+              }
+            }
           }
         }
       }

@@ -11,29 +11,30 @@ public class AccountEventsHandler :
     IMulticastCommandHandler<TransactionCreatedEvent>,
     IMulticastCommandHandler<TransactionUpdatedEvent>
 {
-    private readonly IHubContext<AccountEventsHub> _hubContext;
+    private readonly IHubContext<AccountEventsHub, IAccountEventsHub> _hubContext;
 
-    public AccountEventsHandler(IHubContext<AccountEventsHub> hubContext)
+    public AccountEventsHandler(IHubContext<AccountEventsHub, IAccountEventsHub> hubContext)
     {
         _hubContext = hubContext;
     }
 
     public async Task<Result> Execute(AccountCreatedEvent @event, CancellationToken ct)
     {
-        await _hubContext.Clients.Users(
-                @event.GrantedUsers.Select(user => user.id)
-                    .Append(@event.CreatedById)
-                    .Append(@event.OwnerId)
-                    .Select(userId => userId.ToString()))
-            .SendCoreAsync("AccountCreated", [ @event ], ct);
+        var clientProxy = _hubContext.Clients.Users(
+            @event.GrantedUsers
+                .Select(user => user.id)
+                .Append(@event.CreatedById)
+                .Append(@event.OwnerId)
+                .Select(userId => userId.ToString()));
+
+        await clientProxy.AccountCreated(@event, ct);
 
         return Result.Ok();
     }
 
     public async Task<Result> Execute(AccountUpdatedEvent @event, CancellationToken ct)
     {
-        throw new NotImplementedException();
-
+        _hubContext.Clients.Clients(default!);
         return Result.Ok();
     }
 

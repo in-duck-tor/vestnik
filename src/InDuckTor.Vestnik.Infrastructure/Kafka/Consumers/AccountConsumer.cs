@@ -8,10 +8,14 @@ using Microsoft.Extensions.Logging;
 
 namespace InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 
-[RetryStrategyStatic(3, retryDelaysSeconds: [ 0, 1, 1 ])]
-public class AccountConsumer(IMulticastExecutor multicastExecutor, ILogger<AccountConsumer> logger) : ITopicConsumer<Null, AccountEnvelop>
+[RetryStrategyStatic(3, retryDelaysSeconds: [0, 1, 1])]
+public class AccountConsumer(
+    IMulticastExecutor multicastExecutor,
+    ILogger<AccountConsumer> logger) : ITopicConsumer<Null, AccountEnvelop>
 {
-    public async Task<ProcessingResult> Consume(ConsumeResult<Null, AccountEnvelop> message, CancellationToken cancellationToken)
+    public async Task<ProcessingResult> Consume(
+        ConsumeResult<Null, AccountEnvelop> message,
+        CancellationToken cancellationToken)
     {
         var envelop = message.Message.Value;
         object? domainMessage = envelop.PayloadCase switch
@@ -38,7 +42,9 @@ public class AccountConsumer(IMulticastExecutor multicastExecutor, ILogger<Accou
 
         if (domainMessage is null)
         {
-            logger.LogDebug("Получено событие {EventType} неизвестного типа {PayloadCase}", typeof(AccountEnvelop), message.Message.Value.PayloadCase);
+            logger.LogDebug("Получено событие {EventType} неизвестного типа {PayloadCase}",
+                typeof(AccountEnvelop),
+                message.Message.Value.PayloadCase);
             return ProcessingResult.Skip;
         }
 

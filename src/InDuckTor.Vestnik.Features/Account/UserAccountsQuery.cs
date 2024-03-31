@@ -1,6 +1,7 @@
 ﻿using InDuckTor.Account.HttpClient;
 using InDuckTor.Shared.Strategies;
 using LazyCache;
+using TimeSpan = System.TimeSpan;
 
 namespace InDuckTor.Vestnik.Features.Account;
 
@@ -17,7 +18,9 @@ public class UserAccountsQuery(IAccountClient accountClient, IAppCache cache) : 
         return await cache.GetOrAddAsync(CreateUsersAccountsCacheKey(args.UserId),
             async () =>
             {
-                var accounts = await accountClient.SearchAsync(new AccountsSearchParams { OwnerId = args.UserId, Take = 1000 }, ct);
+                var accounts = await accountClient.SearchAsync(
+                    new AccountsSearchParams { OwnerId = args.UserId, Take = 1000 }, 
+                    ct);
                 return accounts.Items ?? Array.Empty<AccountDto>();
             },
             TimeSpan.FromMinutes(CacheExpirationMinutes));
