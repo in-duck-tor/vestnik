@@ -284,3 +284,5 @@ global.json
 *.received.*
 
 node_modules
+
+firebase-credentials

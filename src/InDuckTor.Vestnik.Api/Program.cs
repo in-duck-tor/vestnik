@@ -6,7 +6,10 @@ using InDuckTor.Vestnik.Api.Configuration;
 using InDuckTor.Vestnik.Api.Endpoints;
 using InDuckTor.Vestnik.Api.Services;
 using InDuckTor.Vestnik.Features.Account;
+using InDuckTor.Vestnik.Infrastructure.Database;
+using InDuckTor.Vestnik.Infrastructure.Firebase;
 using InDuckTor.Vestnik.Infrastructure.Kafka;
+using InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,15 +23,18 @@ services
     .AddSingleton<IUserIdProvider, InDuckTorUserIdProvider>()
     .AddSignalR();
 
+services.AddDatabase();
 services.AddVestnikKafka(configuration.GetSection("Kafka"));
-
 services.AddHttpClients(configuration.GetSection("HttpClients"));
+services.AddLazyCache();
+services.AddFirebase(configuration.GetSection("Firebase"));
 
-services.AddStrategiesFrom(Assembly.GetAssembly(typeof(AccountEventsHandler))!);
+services.AddStrategiesFrom(
+    Assembly.GetAssembly(typeof(AccountEventsHandler))!,
+    Assembly.GetAssembly(typeof(AccountConsumer))!);
 
 services.AddEndpointsApiExplorer();
 services.AddVestnikSwaggerGen();
-
 
 var app = builder.Build();
 
@@ -44,6 +50,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseInDuckTorSecurity();
 
-app.AddWebSocketsEndpoints();
+app.AddWebSocketsEndpoints()
+    .AddClientAppRegistrationEndpoints();
 
 app.Run();

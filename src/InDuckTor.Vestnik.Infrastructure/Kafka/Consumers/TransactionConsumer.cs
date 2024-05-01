@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 namespace InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 
 [RetryStrategyStatic(3, retryDelaysSeconds: [ 0, 1, 1 ])]
-public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<TransactionConsumer> logger) : ITopicConsumer<string, TransactionEnvelop>
+public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<TransactionConsumer> logger) : IConsumerStrategy<string, TransactionEnvelop>
 {
-    public async Task<ProcessingResult> Consume(ConsumeResult<string, TransactionEnvelop> message, CancellationToken cancellationToken)
+    public async Task<ProcessingResult> Execute(ConsumeResult<string, TransactionEnvelop> message, CancellationToken cancellationToken)
     {
         var envelop = message.Message.Value;
         object? domainMessage = envelop.PayloadCase switch

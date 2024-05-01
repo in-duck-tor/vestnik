@@ -31,7 +31,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> AccountAllAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> GetMyAccountsAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -39,14 +39,15 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> AccountAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> GetMyAccountsAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Открыть новый счёт для текущего пользователя
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task AccountAsync(OpenPaymentAccountRequest body);
+        [System.Obsolete]
+        System.Threading.Tasks.Task OpenNewPaymentAccountAsync(OpenPaymentAccountRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -54,13 +55,15 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task AccountAsync(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken);
+        [System.Obsolete]
+        System.Threading.Tasks.Task OpenNewPaymentAccountAsync(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Запрос пользователя закрыть счёт
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task CloseAsync(string accountNumber);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -69,6 +72,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task CloseAsync(string accountNumber, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
@@ -76,6 +80,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task FreezeAsync(string accountNumber);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -84,6 +89,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task FreezeAsync(string accountNumber, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
@@ -91,7 +97,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> TransactionAllAsync(string accountNumber, int? take, int? skip);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> GetMyAccountTransactionsAsync(string accountNumber, int? take, int? skip);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -99,13 +105,14 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> TransactionAllAsync(string accountNumber, int? take, int? skip, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> GetMyAccountTransactionsAsync(string accountNumber, int? take, int? skip, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Запрос пользователя разморозить счёт
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task UnfreezeAsync(string accountNumber);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -114,6 +121,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task UnfreezeAsync(string accountNumber, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
@@ -121,6 +129,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task<MakeTransactionResult> TransactionAsync(NewTransactionRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -129,6 +138,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task<MakeTransactionResult> TransactionAsync(NewTransactionRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
@@ -136,7 +146,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> BankAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> GetBanksInfoAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -144,13 +154,14 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> BankAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> GetBanksInfoAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Создать счёт
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task<CreateAccountResult> CreateAccountAsync(CreateAccountRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -159,6 +170,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task<CreateAccountResult> CreateAccountAsync(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
@@ -181,7 +193,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAsync(AccountsSearchParams body);
+        System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAccountsAsync(AccountsSearchParams body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -189,13 +201,14 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAsync(AccountsSearchParams body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAccountsAsync(AccountsSearchParams body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Начать трансакцию между счётами
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task<OpenTransactionResult> OpenTransactionAsync(OpenTransactionRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -204,6 +217,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         System.Threading.Tasks.Task<OpenTransactionResult> OpenTransactionAsync(OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
@@ -211,7 +225,8 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CancelAsync(long transactionId);
+        [System.Obsolete]
+        System.Threading.Tasks.Task CancelTransactionAsync(long transactionId);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -219,14 +234,16 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CancelAsync(long transactionId, System.Threading.CancellationToken cancellationToken);
+        [System.Obsolete]
+        System.Threading.Tasks.Task CancelTransactionAsync(long transactionId, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Зафиксировать трансакцию между счётами
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CommitAsync(long transactionId);
+        [System.Obsolete]
+        System.Threading.Tasks.Task CommitTransactionAsync(long transactionId);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -234,14 +251,15 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CommitAsync(long transactionId, System.Threading.CancellationToken cancellationToken);
+        [System.Obsolete]
+        System.Threading.Tasks.Task CommitTransactionAsync(long transactionId, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Получение информации об известных валютах
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> CurrencyAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> GetCurrenciesInfoAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
@@ -249,7 +267,142 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> CurrencyAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> GetCurrenciesInfoAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Открыть новый счёт для текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Открыть новый счёт для текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Запрос пользователя закрыть счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Запрос пользователя закрыть счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Запрос пользователя заморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Запрос пользователя заморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Запрос пользователя разморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Запрос пользователя разморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Совершить трансакцию по счёту текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Совершить трансакцию по счёту текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Отправляет команду на создание счёта. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на создание счёта. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
+
+        /// <remarks>
+        /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -302,9 +455,9 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> AccountAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> GetMyAccountsAsync()
         {
-            return AccountAllAsync(System.Threading.CancellationToken.None);
+            return GetMyAccountsAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -313,7 +466,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> AccountAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<PaymentAccountDto>> GetMyAccountsAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -386,9 +539,10 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task AccountAsync(OpenPaymentAccountRequest body)
+        [System.Obsolete]
+        public virtual System.Threading.Tasks.Task OpenNewPaymentAccountAsync(OpenPaymentAccountRequest body)
         {
-            return AccountAsync(body, System.Threading.CancellationToken.None);
+            return OpenNewPaymentAccountAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -397,7 +551,8 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task AccountAsync(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        [System.Obsolete]
+        public virtual async System.Threading.Tasks.Task OpenNewPaymentAccountAsync(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -483,6 +638,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual System.Threading.Tasks.Task CloseAsync(string accountNumber)
         {
             return CloseAsync(accountNumber, System.Threading.CancellationToken.None);
@@ -494,6 +650,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual async System.Threading.Tasks.Task CloseAsync(string accountNumber, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
@@ -579,6 +736,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual System.Threading.Tasks.Task FreezeAsync(string accountNumber)
         {
             return FreezeAsync(accountNumber, System.Threading.CancellationToken.None);
@@ -590,6 +748,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual async System.Threading.Tasks.Task FreezeAsync(string accountNumber, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
@@ -675,9 +834,9 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> TransactionAllAsync(string accountNumber, int? take, int? skip)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> GetMyAccountTransactionsAsync(string accountNumber, int? take, int? skip)
         {
-            return TransactionAllAsync(accountNumber, take, skip, System.Threading.CancellationToken.None);
+            return GetMyAccountTransactionsAsync(accountNumber, take, skip, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -686,7 +845,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> TransactionAllAsync(string accountNumber, int? take, int? skip, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransactionDto>> GetMyAccountTransactionsAsync(string accountNumber, int? take, int? skip, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
                 throw new System.ArgumentNullException("accountNumber");
@@ -792,6 +951,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual System.Threading.Tasks.Task UnfreezeAsync(string accountNumber)
         {
             return UnfreezeAsync(accountNumber, System.Threading.CancellationToken.None);
@@ -803,6 +963,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual async System.Threading.Tasks.Task UnfreezeAsync(string accountNumber, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
@@ -888,6 +1049,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual System.Threading.Tasks.Task<MakeTransactionResult> TransactionAsync(NewTransactionRequest body)
         {
             return TransactionAsync(body, System.Threading.CancellationToken.None);
@@ -899,6 +1061,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual async System.Threading.Tasks.Task<MakeTransactionResult> TransactionAsync(NewTransactionRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
@@ -997,9 +1160,9 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> BankAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> GetBanksInfoAsync()
         {
-            return BankAsync(System.Threading.CancellationToken.None);
+            return GetBanksInfoAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1008,7 +1171,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> BankAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BankInfo>> GetBanksInfoAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1081,6 +1244,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual System.Threading.Tasks.Task<CreateAccountResult> CreateAccountAsync(CreateAccountRequest body)
         {
             return CreateAccountAsync(body, System.Threading.CancellationToken.None);
@@ -1092,6 +1256,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual async System.Threading.Tasks.Task<CreateAccountResult> CreateAccountAsync(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
@@ -1289,9 +1454,9 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAsync(AccountsSearchParams body)
+        public virtual System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAccountsAsync(AccountsSearchParams body)
         {
-            return SearchAsync(body, System.Threading.CancellationToken.None);
+            return SearchAccountsAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1300,7 +1465,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAsync(AccountsSearchParams body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CollectionSearchResult_1> SearchAccountsAsync(AccountsSearchParams body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -1386,6 +1551,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual System.Threading.Tasks.Task<OpenTransactionResult> OpenTransactionAsync(OpenTransactionRequest body)
         {
             return OpenTransactionAsync(body, System.Threading.CancellationToken.None);
@@ -1397,6 +1563,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        [System.Obsolete]
         public virtual async System.Threading.Tasks.Task<OpenTransactionResult> OpenTransactionAsync(OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
@@ -1477,9 +1644,10 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CancelAsync(long transactionId)
+        [System.Obsolete]
+        public virtual System.Threading.Tasks.Task CancelTransactionAsync(long transactionId)
         {
-            return CancelAsync(transactionId, System.Threading.CancellationToken.None);
+            return CancelTransactionAsync(transactionId, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1488,7 +1656,8 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CancelAsync(long transactionId, System.Threading.CancellationToken cancellationToken)
+        [System.Obsolete]
+        public virtual async System.Threading.Tasks.Task CancelTransactionAsync(long transactionId, System.Threading.CancellationToken cancellationToken)
         {
             if (transactionId == null)
                 throw new System.ArgumentNullException("transactionId");
@@ -1573,9 +1742,10 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CommitAsync(long transactionId)
+        [System.Obsolete]
+        public virtual System.Threading.Tasks.Task CommitTransactionAsync(long transactionId)
         {
-            return CommitAsync(transactionId, System.Threading.CancellationToken.None);
+            return CommitTransactionAsync(transactionId, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1584,7 +1754,8 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CommitAsync(long transactionId, System.Threading.CancellationToken cancellationToken)
+        [System.Obsolete]
+        public virtual async System.Threading.Tasks.Task CommitTransactionAsync(long transactionId, System.Threading.CancellationToken cancellationToken)
         {
             if (transactionId == null)
                 throw new System.ArgumentNullException("transactionId");
@@ -1669,9 +1840,9 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> CurrencyAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> GetCurrenciesInfoAsync()
         {
-            return CurrencyAsync(System.Threading.CancellationToken.None);
+            return GetCurrenciesInfoAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1680,7 +1851,7 @@ namespace InDuckTor.Account.HttpClient
         /// </remarks>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> CurrencyAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<CurrencyInfo>> GetCurrenciesInfoAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1727,6 +1898,770 @@ namespace InDuckTor.Account.HttpClient
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Открыть новый счёт для текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body)
+        {
+            return OpenNewPaymentAccountV2Async(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Открыть новый счёт для текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/account"
+                    urlBuilder_.Append("api/v2/account");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Запрос пользователя закрыть счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber)
+        {
+            return CloseAccountV2Async(accountNumber, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Запрос пользователя закрыть счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken)
+        {
+            if (accountNumber == null)
+                throw new System.ArgumentNullException("accountNumber");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/account/{accountNumber}/close"
+                    urlBuilder_.Append("api/v2/account/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(accountNumber, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/close");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Запрос пользователя заморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber)
+        {
+            return FreezeAccountV2Async(accountNumber, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Запрос пользователя заморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken)
+        {
+            if (accountNumber == null)
+                throw new System.ArgumentNullException("accountNumber");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/account/{accountNumber}/freeze"
+                    urlBuilder_.Append("api/v2/account/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(accountNumber, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/freeze");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Запрос пользователя разморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber)
+        {
+            return UnfreezeAccountV2Async(accountNumber, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Запрос пользователя разморозить счёт
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken)
+        {
+            if (accountNumber == null)
+                throw new System.ArgumentNullException("accountNumber");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/account/{accountNumber}/unfreeze"
+                    urlBuilder_.Append("api/v2/account/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(accountNumber, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/unfreeze");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Совершить трансакцию по счёту текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body)
+        {
+            return MakeTransactionV2Async(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Совершить трансакцию по счёту текущего пользователя
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/account/transaction"
+                    urlBuilder_.Append("api/v2/account/transaction");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Отправляет команду на создание счёта. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body)
+        {
+            return CreateAccountV2Async(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на создание счёта. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/bank/account"
+                    urlBuilder_.Append("api/v2/bank/account");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body)
+        {
+            return OpenTransactionV2Async(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/bank/account/transaction"
+                    urlBuilder_.Append("api/v2/bank/account/transaction");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body)
+        {
+            return CancelTransactionV2Async(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/bank/account/transaction/{transactionId}/cancel"
+                    urlBuilder_.Append("api/v2/bank/account/transaction/");
+                    urlBuilder_.Append("/cancel");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <remarks>
+        /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body)
+        {
+            return CommitTransactionV2Async(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <remarks>
+        /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
+        /// </remarks>
+        /// <returns>Accepted</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                    if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
+                    // Operation Path: "api/v2/bank/account/transaction/{transactionId}/commit"
+                    urlBuilder_.Append("api/v2/bank/account/transaction/");
+                    urlBuilder_.Append("/commit");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 202)
+                        {
+                            return;
                         }
                         else
                         {

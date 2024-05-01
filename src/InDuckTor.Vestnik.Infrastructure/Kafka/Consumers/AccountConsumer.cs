@@ -1,6 +1,8 @@
 ﻿using Confluent.Kafka;
 using InDuckTor.Account.Contracts.Public;
+using InDuckTor.Shared.Interceptors;
 using InDuckTor.Shared.Kafka;
+using InDuckTor.Shared.Kafka.Interceptors;
 using InDuckTor.Shared.Strategies;
 using InDuckTor.Shared.Utils;
 using InDuckTor.Vestnik.Domain;
@@ -8,14 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 
-[RetryStrategyStatic(3, retryDelaysSeconds: [0, 1, 1])]
+[RetryStrategyStatic(3, retryDelaysSeconds: [ 0, 1, 1 ])]
+[Intercept(typeof(ConversationConsumerInterceptor<Null, AccountEnvelop>))] // todo remove 
 public class AccountConsumer(
     IMulticastExecutor multicastExecutor,
-    ILogger<AccountConsumer> logger) : ITopicConsumer<Null, AccountEnvelop>
+    ILogger<AccountConsumer> logger) : IConsumerStrategy<Null, AccountEnvelop>
 {
-    public async Task<ProcessingResult> Consume(
-        ConsumeResult<Null, AccountEnvelop> message,
-        CancellationToken cancellationToken)
+    public async Task<ProcessingResult> Execute(ConsumeResult<Null, AccountEnvelop> message, CancellationToken cancellationToken)
     {
         var envelop = message.Message.Value;
         object? domainMessage = envelop.PayloadCase switch

@@ -18,6 +18,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "local_http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5057",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local",
+        "GOOGLE_APPLICATION_CREDENTIALS": "firebase/inductorbank-firebase-adminsdk-vubjz-88cb2fadb6.json"
+      }
+    },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,

@@ -4,10 +4,13 @@ using Microsoft.Extensions.Options;
 
 namespace InDuckTor.Vestnik.Api.Configuration;
 
+public class HttpClientConfiguration
+{
+    public required Uri BaseUrl { get; set; }
+}
+
 public static class HttpClientsConfiguration
 {
-    public record HttpClientConfiguration(Uri BaseUrl);
-
     /// <summary>
     /// Настраивает http клиенты для сервиса
     /// </summary>

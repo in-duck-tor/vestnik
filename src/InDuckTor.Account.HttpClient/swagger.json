@@ -8,10 +8,10 @@
     "/api/v1/account": {
       "get": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Получить все счёта текущего пользователя",
-        "operationId": "accountAll",
+        "operationId": "GetMyAccounts",
         "responses": {
           "200": {
             "description": "OK",
@@ -30,10 +30,10 @@
       },
       "post": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Открыть новый счёт для текущего пользователя",
-        "operationId": "account",
+        "operationId": "OpenNewPaymentAccount",
         "requestBody": {
           "content": {
             "application/json": {
@@ -54,13 +54,14 @@
           "202": {
             "description": "Accepted"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/account/{accountNumber}/close": {
       "post": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Запрос пользователя закрыть счёт",
         "operationId": "close",
@@ -85,13 +86,14 @@
           "204": {
             "description": "No Content"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/account/{accountNumber}/freeze": {
       "put": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Запрос пользователя заморозить счёт",
         "operationId": "freeze",
@@ -116,16 +118,17 @@
           "204": {
             "description": "No Content"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/account/{accountNumber}/transaction": {
       "get": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Планируется переход на Keyset Pagination https://struchkov.dev/blog/ru/seek-method-or-keyset-pagination",
-        "operationId": "transactionAll",
+        "operationId": "GetMyAccountTransactions",
         "parameters": [
           {
             "name": "accountNumber",
@@ -184,7 +187,7 @@
     "/api/v1/account/{accountNumber}/unfreeze": {
       "put": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Запрос пользователя разморозить счёт",
         "operationId": "unfreeze",
@@ -209,13 +212,14 @@
           "204": {
             "description": "No Content"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/account/transaction": {
       "post": {
         "tags": [
-          "PaymentAccounts"
+          "PaymentAccounts V1"
         ],
         "description": "Совершить трансакцию по счёту текущего пользователя",
         "operationId": "transaction",
@@ -249,7 +253,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/bank": {
@@ -258,7 +263,7 @@
           "BankInfo"
         ],
         "description": "Получение информации об известных банках",
-        "operationId": "bank",
+        "operationId": "GetBanksInfo",
         "responses": {
           "200": {
             "description": "OK",
@@ -279,7 +284,7 @@
     "/api/v1/bank/account": {
       "post": {
         "tags": [
-          "BankingAccounts"
+          "BankingAccounts V1"
         ],
         "description": "Создать счёт",
         "operationId": "CreateAccount",
@@ -310,13 +315,14 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/bank/account/{accountNumber}/transaction": {
       "get": {
         "tags": [
-          "BankingAccounts"
+          "BankingAccounts V1"
         ],
         "description": "Планируется переход на Keyset Pagination https://struchkov.dev/blog/ru/seek-method-or-keyset-pagination",
         "operationId": "GetAccountTransactions",
@@ -372,10 +378,10 @@
     "/api/v1/bank/account/search": {
       "put": {
         "tags": [
-          "BankingAccounts"
+          "BankingAccounts V1"
         ],
         "description": "Поиск по всем счётам",
-        "operationId": "search",
+        "operationId": "SearchAccounts",
         "requestBody": {
           "content": {
             "application/json": {
@@ -406,7 +412,7 @@
     "/api/v1/bank/account/transaction": {
       "post": {
         "tags": [
-          "BankingAccounts"
+          "BankingAccounts V1"
         ],
         "description": "Начать трансакцию между счётами",
         "operationId": "OpenTransaction",
@@ -431,16 +437,17 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/bank/account/transaction/{transactionId}/cancel": {
       "post": {
         "tags": [
-          "BankingAccounts"
+          "BankingAccounts V1"
         ],
         "description": "Отменить трансакцию между счётами",
-        "operationId": "cancel",
+        "operationId": "CancelTransaction",
         "parameters": [
           {
             "name": "transactionId",
@@ -463,16 +470,17 @@
           "204": {
             "description": "No Content"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/bank/account/transaction/{transactionId}/commit": {
       "post": {
         "tags": [
-          "BankingAccounts"
+          "BankingAccounts V1"
         ],
         "description": "Зафиксировать трансакцию между счётами",
-        "operationId": "commit",
+        "operationId": "CommitTransaction",
         "parameters": [
           {
             "name": "transactionId",
@@ -495,7 +503,8 @@
           "204": {
             "description": "No Content"
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/v1/bank/currency": {
@@ -504,7 +513,7 @@
           "BankInfo"
         ],
         "description": "Получение информации об известных валютах",
-        "operationId": "currency",
+        "operationId": "GetCurrenciesInfo",
         "responses": {
           "200": {
             "description": "OK",
@@ -518,6 +527,225 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v2/account": {
+      "post": {
+        "tags": [
+          "PaymentAccounts V2"
+        ],
+        "description": "Открыть новый счёт для текущего пользователя",
+        "operationId": "OpenNewPaymentAccountV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenPaymentAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/account/{accountNumber}/close": {
+      "post": {
+        "tags": [
+          "PaymentAccounts V2"
+        ],
+        "description": "Запрос пользователя закрыть счёт",
+        "operationId": "CloseAccountV2",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AccountNumber"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/account/{accountNumber}/freeze": {
+      "put": {
+        "tags": [
+          "PaymentAccounts V2"
+        ],
+        "description": "Запрос пользователя заморозить счёт",
+        "operationId": "FreezeAccountV2",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AccountNumber"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/account/{accountNumber}/unfreeze": {
+      "put": {
+        "tags": [
+          "PaymentAccounts V2"
+        ],
+        "description": "Запрос пользователя разморозить счёт",
+        "operationId": "UnfreezeAccountV2",
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/account/transaction": {
+      "post": {
+        "tags": [
+          "PaymentAccounts V2"
+        ],
+        "description": "Совершить трансакцию по счёту текущего пользователя",
+        "operationId": "MakeTransactionV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/bank/account": {
+      "post": {
+        "tags": [
+          "BankingAccounts V2"
+        ],
+        "description": "Отправляет команду на создание счёта. Только для внешних клиентов",
+        "operationId": "CreateAccountV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/bank/account/transaction": {
+      "post": {
+        "tags": [
+          "BankingAccounts V2"
+        ],
+        "description": "Отправляет команду на начало трансакции между счётами. Только для внешних клиентов",
+        "operationId": "OpenTransactionV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/bank/account/transaction/{transactionId}/cancel": {
+      "post": {
+        "tags": [
+          "BankingAccounts V2"
+        ],
+        "description": "Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов",
+        "operationId": "CancelTransactionV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v2/bank/account/transaction/{transactionId}/commit": {
+      "post": {
+        "tags": [
+          "BankingAccounts V2"
+        ],
+        "description": "Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов",
+        "operationId": "CommitTransactionV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
           }
         }
       }

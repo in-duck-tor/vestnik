@@ -18,7 +18,7 @@ public class UserAccountsQuery(IAccountClient accountClient, IAppCache cache) : 
         return await cache.GetOrAddAsync(CreateUsersAccountsCacheKey(args.UserId),
             async () =>
             {
-                var accounts = await accountClient.SearchAsync(
+                var accounts = await accountClient.SearchAccountsAsync(
                     new AccountsSearchParams { OwnerId = args.UserId, Take = 1000 }, 
                     ct);
                 return accounts.Items ?? Array.Empty<AccountDto>();
