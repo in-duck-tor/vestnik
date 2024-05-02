@@ -20,4 +20,4 @@ VOLUME /app/certs
 WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://*:80
-ENTRYPOINT ["dotnet", "InDuckTor.Credit.WebApi.dll"]
+ENTRYPOINT ["dotnet", "InDuckTor.Vestnik.Api.dll"]
