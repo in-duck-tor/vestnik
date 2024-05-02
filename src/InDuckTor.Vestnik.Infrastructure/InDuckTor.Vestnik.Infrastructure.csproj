@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="firebase\**">
+      <None Update="firebase-credentials\**">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>

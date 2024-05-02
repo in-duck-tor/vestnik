@@ -8,17 +8,16 @@ namespace InDuckTor.Vestnik.Api.Endpoints;
 
 public static class ClientAppRegistrationEndpoints
 {
-    public static IEndpointRouteBuilder AddClientAppRegistrationEndpoints(this IEndpointRouteBuilder builder)
+    public static void AddClientAppRegistrationEndpoints(this IEndpointRouteBuilder builder)
     {
-        var groupBuilder = builder.MapGroup("/api/v1/ws/vestnik/app-registration")
+        var groupBuilder = builder.MapGroup("/api/v1/vestnik/app-registration")
             .WithTags("ClientAppRegistration")
             .WithOpenApi();
 
         groupBuilder.MapPut("/", SetClientAppRegistration)
             .WithName(nameof(SetClientAppRegistration))
-            .WithDescription("Регистрирует кдиентское прилложение в системе. Дедуплицирует существующие регистрации");
-
-        return builder;
+            .WithDescription("Регистрирует кдиентское прилложение в системе. Дедуплицирует существующие регистрации")
+            .RequireAuthorization();
     }
 
     public record ClientAppRegistrationRequest(string RegistrationToken, DateTime? RegisteredAt, string ApplicationId, string? DeviceId);

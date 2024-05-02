@@ -5,7 +5,7 @@ namespace InDuckTor.Vestnik.Api.Endpoints;
 
 public static class WebSocketEndpoints
 {
-    public static IEndpointRouteBuilder AddWebSocketsEndpoints(this IEndpointRouteBuilder builder)
+    public static void AddWebSocketsEndpoints(this IEndpointRouteBuilder builder)
     {
         var groupBuilder = builder.MapGroup("/api/v1/ws/vestnik")
             .WithTags("WebSockets")
@@ -14,7 +14,5 @@ public static class WebSocketEndpoints
         groupBuilder.MapHub<AccountEventsHub>("account-events")
             .WithOpenApi()
             .RequireAuthorization();
-
-        return groupBuilder;
     }
 }

@@ -1,3 +1,4 @@
+using InDuckTor.Shared.Configuration.Swagger;
 using Microsoft.OpenApi.Models;
 
 namespace InDuckTor.Vestnik.Api.Configuration;
@@ -9,7 +10,7 @@ public static class SwaggerConfiguration
         return services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo { Title = "Vestnik API v1", Version = "v1" });
-            // here some other configurations maybe...
+            options.ConfigureJwtAuth();
             options.AddSignalRSwaggerGen();
         });
     }

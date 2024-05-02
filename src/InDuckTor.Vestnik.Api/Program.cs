@@ -50,7 +50,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseInDuckTorSecurity();
 
-app.AddWebSocketsEndpoints()
-    .AddClientAppRegistrationEndpoints();
+app.AddWebSocketsEndpoints();
+app.AddClientAppRegistrationEndpoints();
+app.AddToolsEndpoints();
 
 app.Run();

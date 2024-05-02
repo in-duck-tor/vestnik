@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InDuckTor.Vestnik.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(VestnikDbContext))]
-    [Migration("20240501194223_Initial")]
+    [Migration("20240502181619_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -35,6 +35,15 @@ namespace InDuckTor.Vestnik.Infrastructure.Database.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("application_id");
+
+                    b.Property<string>("DeviceId")
+                        .HasColumnType("text")
+                        .HasColumnName("device_id");
+
                     b.Property<DateTime?>("ExpiresAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("expires_at");
@@ -54,6 +63,9 @@ namespace InDuckTor.Vestnik.Infrastructure.Database.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_client_app_registrations");
+
+                    b.HasIndex("ApplicationId")
+                        .HasDatabaseName("ix_client_app_registrations_application_id");
 
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_client_app_registrations_user_id");

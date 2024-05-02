@@ -22,7 +22,9 @@ namespace InDuckTor.Vestnik.Infrastructure.Database.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    application_id = table.Column<string>(type: "text", nullable: false),
                     registration_token = table.Column<string>(type: "text", nullable: false),
+                    device_id = table.Column<string>(type: "text", nullable: true),
                     user_id = table.Column<int>(type: "integer", nullable: true),
                     registered_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     expires_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -31,6 +33,12 @@ namespace InDuckTor.Vestnik.Infrastructure.Database.Migrations
                 {
                     table.PrimaryKey("pk_client_app_registrations", x => x.id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_client_app_registrations_application_id",
+                schema: "vestnik",
+                table: "client_app_registrations",
+                column: "application_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_client_app_registrations_user_id",
