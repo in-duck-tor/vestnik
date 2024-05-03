@@ -11,6 +11,7 @@ public static class SwaggerConfiguration
         {
             options.SwaggerDoc("v1", new OpenApiInfo { Title = "Vestnik API v1", Version = "v1" });
             options.ConfigureJwtAuth();
+            options.ConfigureEnumMemberValues();
             options.AddSignalRSwaggerGen();
         });
     }

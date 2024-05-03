@@ -1,7 +1,10 @@
 using System.Reflection;
+using InDuckTor.Shared.Security;
+using InDuckTor.Shared.Security.Context;
 using InDuckTor.Shared.Security.Http;
 using InDuckTor.Shared.Security.Jwt;
 using InDuckTor.Shared.Strategies;
+using InDuckTor.Shared.Utils;
 using InDuckTor.Vestnik.Api.Configuration;
 using InDuckTor.Vestnik.Api.Endpoints;
 using InDuckTor.Vestnik.Api.Services;
@@ -18,7 +21,15 @@ var configuration = builder.Configuration;
 
 services
     .AddInDuckTorAuthentication(configuration.GetSection(nameof(JwtSettings)))
-    .AddInDuckTorSecurity();
+    .AddInDuckTorSecurity()
+    // for debug purposes
+    .AddAuthorization(options =>
+    {
+        options.AddPolicy("SystemAccess", policyBuilder =>
+        {
+            policyBuilder.RequireClaim(InDuckTorClaims.AccountType, AccountType.System.GetEnumMemberName());
+        });
+    });
 services
     .AddSingleton<IUserIdProvider, InDuckTorUserIdProvider>()
     .AddSignalR();
@@ -33,6 +44,7 @@ services.AddStrategiesFrom(
     Assembly.GetAssembly(typeof(AccountEventsHandler))!,
     Assembly.GetAssembly(typeof(AccountConsumer))!);
 
+services.ConfigureJsonConverters();
 services.AddEndpointsApiExplorer();
 services.AddVestnikSwaggerGen();
 

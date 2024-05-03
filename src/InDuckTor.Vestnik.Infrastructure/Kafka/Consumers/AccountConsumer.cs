@@ -24,19 +24,19 @@ public class AccountConsumer(
             AccountEnvelop.PayloadOneofCase.AccountCreated
                 => new AccountCreatedEvent(
                     envelop.AccountCreated.AccountNumber,
-                    envelop.AccountCreated.Type.GetEnumMemberName(),
-                    envelop.AccountCreated.State.GetEnumMemberName(),
+                    envelop.AccountCreated.Type,
+                    envelop.AccountCreated.State,
                     envelop.AccountCreated.OwnerId,
                     envelop.AccountCreated.CreatedById,
                     envelop.AccountCreated.GrantedUsers.Select(user => (
                             user.Id,
-                            user.Actions.Select(action => action.GetEnumMemberName()).ToArray()))
+                            user.Actions.ToArray()))
                         .ToArray()),
             AccountEnvelop.PayloadOneofCase.AccountStateChanged
                 => new AccountUpdatedEvent(
                     envelop.AccountStateChanged.AccountNumber,
-                    envelop.AccountStateChanged.Type.GetEnumMemberName(),
-                    envelop.AccountStateChanged.State.GetEnumMemberName(),
+                    envelop.AccountStateChanged.Type,
+                    envelop.AccountStateChanged.State,
                     envelop.AccountStateChanged.ChangedById),
             _ => null
         };

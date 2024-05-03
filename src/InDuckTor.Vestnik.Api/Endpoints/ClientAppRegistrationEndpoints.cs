@@ -20,7 +20,7 @@ public static class ClientAppRegistrationEndpoints
             .RequireAuthorization();
     }
 
-    public record ClientAppRegistrationRequest(string RegistrationToken, DateTime? RegisteredAt, string ApplicationId, string? DeviceId);
+    public record ClientAppRegistrationRequest(string RegistrationToken, DateTime? RegisteredAt, ApplicationVariant ApplicationId, string? DeviceId);
 
     internal static async Task<NoContent> SetClientAppRegistration(ClientAppRegistrationRequest request, ISecurityContext securityContext, VestnikDbContext dbContext, CancellationToken ct)
     {

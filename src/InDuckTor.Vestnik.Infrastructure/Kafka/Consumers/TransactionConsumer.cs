@@ -19,15 +19,15 @@ public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<T
             TransactionEnvelop.PayloadOneofCase.TransactionStarted
                 => new TransactionCreatedEvent(
                     envelop.TransactionStarted.Id,
-                    envelop.TransactionStarted.Type.GetEnumMemberName(),
-                    envelop.TransactionStarted.Status.GetEnumMemberName(),
+                    envelop.TransactionStarted.Type,
+                    envelop.TransactionStarted.Status,
                     MapTransactionTarget(envelop.TransactionStarted.DepositOn),
                     MapTransactionTarget(envelop.TransactionStarted.WithdrawFrom)),
             TransactionEnvelop.PayloadOneofCase.TransactionFinished
                 => new TransactionUpdatedEvent(
                     envelop.TransactionFinished.Id,
-                    envelop.TransactionFinished.Type.GetEnumMemberName(),
-                    envelop.TransactionFinished.Status.GetEnumMemberName()),
+                    envelop.TransactionFinished.Type,
+                    envelop.TransactionFinished.Status),
             _ => null
         };
 

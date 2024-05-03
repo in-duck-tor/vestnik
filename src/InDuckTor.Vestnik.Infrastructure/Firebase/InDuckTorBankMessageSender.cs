@@ -1,9 +1,8 @@
 ﻿using FirebaseAdmin.Messaging;
+using InDuckTor.Vestnik.Domain.Messaging;
 using Microsoft.Extensions.Logging;
 
 namespace InDuckTor.Vestnik.Infrastructure.Firebase;
-
-public record NotificationDataBase(string Title, string Body, string? ImageUrl = null);
 
 public interface IInDuckTorBankMessageSender
 {

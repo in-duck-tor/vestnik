@@ -1,22 +1,24 @@
-﻿namespace InDuckTor.Vestnik.Domain;
+﻿using InDuckTor.Account.Contracts.Public;
+
+namespace InDuckTor.Vestnik.Domain;
 
 public record AccountCreatedEvent(
     string AccountNumber,
-    string AccountType,
-    string AccountStatus,
+    AccountType AccountType,
+    AccountState AccountState,
     int OwnerId,
     int CreatedById,
-    (int id, string[] actions)[] GrantedUsers);
+    (int id, AccountAction[] actions)[] GrantedUsers);
 
-public record AccountUpdatedEvent(string AccountNumber, string AccountType, string AccountStatus, int ChangedById);
+public record AccountUpdatedEvent(string AccountNumber, AccountType AccountType, AccountState AccountState, int ChangedById);
 
 public record TransactionTarget(string AccountNumber, string CurrencyCode, decimal Amount, long BankCode);
 
 public record TransactionCreatedEvent(
     long TransactionId,
-    string Type,
-    string Status,
+    TransactionType Type,
+    TransactionStatus Status,
     TransactionTarget DepositOn,
     TransactionTarget WithdrawFrom);
 
-public record TransactionUpdatedEvent(long TransactionId, string Type, string Status);
+public record TransactionUpdatedEvent(long TransactionId, TransactionType Type, TransactionStatus Status);

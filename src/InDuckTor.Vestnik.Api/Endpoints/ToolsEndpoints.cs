@@ -1,4 +1,5 @@
-﻿using InDuckTor.Vestnik.Infrastructure.Database;
+﻿using InDuckTor.Vestnik.Domain.Messaging;
+using InDuckTor.Vestnik.Infrastructure.Database;
 using InDuckTor.Vestnik.Infrastructure.Firebase;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ public static class ToolsEndpoints
     {
         var groupBuilder = builder.MapGroup("/api/vestnik/tool")
             .WithTags("Tool\\Debug")
+            .RequireAuthorization("SystemAccess")
             .WithOpenApi(operation =>
             {
                 operation.Deprecated = true;
