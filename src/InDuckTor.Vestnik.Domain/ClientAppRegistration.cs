@@ -16,7 +16,7 @@ public class ClientAppRegistration
 public enum ApplicationVariant
 {
     [EnumMember(Value = "inductorbank")]
-    ClientBank,
+    ClientBank = 1,
     [EnumMember(Value = "employee_inductorbank")]
-    EmployeeWebInterface
+    EmployeeWebInterface = 2
 }
