@@ -12,7 +12,19 @@ public static class AccountGroupExtensions
     {
         return groupManager.AddToGroupAsync(
             connectionId,
-            AccountGroup.GetAccountGroupName(accountNumber),
+            AccountGroup.GetGroupName(accountNumber),
+            cancellationToken);
+    }
+
+    public static Task AddToTransactionGroup(
+        this IGroupManager groupManager,
+        string connectionId,
+        long transactionId,
+        CancellationToken cancellationToken)
+    {
+        return groupManager.AddToGroupAsync(
+            connectionId,
+            TransactionGroup.GetGroupName(transactionId),
             cancellationToken);
     }
 }
@@ -21,5 +33,12 @@ public static class AccountGroup
 {
     private const string AccountGroupName = "account/";
 
-    public static string GetAccountGroupName(string accountNumber) => AccountGroupName + accountNumber;
+    public static string GetGroupName(string accountNumber) => AccountGroupName + accountNumber;
+}
+
+public static class TransactionGroup
+{
+    private const string TransactionGroupName = "transaction/";
+
+    public static string GetGroupName(long transactionId) => TransactionGroupName + transactionId;
 }

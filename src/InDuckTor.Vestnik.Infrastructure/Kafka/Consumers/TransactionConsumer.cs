@@ -8,10 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 
-[RetryStrategyStatic(3, retryDelaysSeconds: [ 0, 1, 1 ])]
-public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<TransactionConsumer> logger) : IConsumerStrategy<string, TransactionEnvelop>
+[RetryStrategyStatic(3, retryDelaysSeconds: [0, 1, 1])]
+public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<TransactionConsumer> logger)
+    : IConsumerStrategy<string, TransactionEnvelop>
 {
-    public async Task<ProcessingResult> Execute(ConsumeResult<string, TransactionEnvelop> message, CancellationToken cancellationToken)
+    public async Task<ProcessingResult> Execute(ConsumeResult<string, TransactionEnvelop> message,
+        CancellationToken cancellationToken)
     {
         var envelop = message.Message.Value;
         object? domainMessage = envelop.PayloadCase switch
@@ -33,7 +35,8 @@ public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<T
 
         if (domainMessage is null)
         {
-            logger.LogDebug("Получено событие {EventType} неизвестного типа {PayloadCase}", typeof(AccountEnvelop), message.Message.Value.PayloadCase);
+            logger.LogDebug("Получено событие {EventType} неизвестного типа {PayloadCase}", typeof(AccountEnvelop),
+                message.Message.Value.PayloadCase);
             return ProcessingResult.Skip;
         }
 
@@ -46,5 +49,7 @@ public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<T
         return ProcessingResult.Ok;
     }
 
-    private static TransactionTarget MapTransactionTarget(TransactionStarted.Types.Target target) => new(target.AccountNumber, target.CurrencyCode, target.Amount, target.BankCode, target.AccountOwnerId);
+    private static TransactionTarget? MapTransactionTarget(TransactionStarted.Types.Target? target) => target == null
+        ? null
+        : new(target.AccountNumber, target.CurrencyCode, target.Amount, target.BankCode, target.AccountOwnerId);
 }

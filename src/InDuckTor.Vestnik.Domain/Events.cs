@@ -18,7 +18,7 @@ public record TransactionCreatedEvent(
     long TransactionId,
     TransactionType Type,
     TransactionStatus Status,
-    TransactionTarget DepositOn,
-    TransactionTarget WithdrawFrom);
+    TransactionTarget? DepositOn,
+    TransactionTarget? WithdrawFrom);
 
 public record TransactionUpdatedEvent(long TransactionId, TransactionType Type, TransactionStatus Status);

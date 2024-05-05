@@ -53,7 +53,7 @@ services.AddLazyCache();
 services.AddFirebase(configuration.GetSection("Firebase"));
 
 services.AddStrategiesFrom(
-        Assembly.GetAssembly(typeof(AccountEventsHandler))!,
+        Assembly.GetAssembly(typeof(AccountCreatedEventHandler))!,
         Assembly.GetAssembly(typeof(AccountConsumer))!)
     .AddVestnikServices();
 
