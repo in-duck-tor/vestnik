@@ -1,6 +1,4 @@
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using InDuckTor.Account.Contracts.Public;
 using InDuckTor.Shared.Security;
 using InDuckTor.Shared.Security.Http;
 using InDuckTor.Shared.Security.Jwt;
@@ -9,7 +7,6 @@ using InDuckTor.Shared.Utils;
 using InDuckTor.Vestnik.Api.Configuration;
 using InDuckTor.Vestnik.Api.Endpoints;
 using InDuckTor.Vestnik.Api.Services;
-using InDuckTor.Vestnik.Domain;
 using InDuckTor.Vestnik.Features.Account;
 using InDuckTor.Vestnik.Infrastructure.Database;
 using InDuckTor.Vestnik.Infrastructure.Firebase;
@@ -54,6 +51,7 @@ services.AddFirebase(configuration.GetSection("Firebase"));
 
 services.AddStrategiesFrom(
         Assembly.GetAssembly(typeof(AccountCreatedEventHandler))!,
+        Assembly.GetAssembly(typeof(IHueta))!,
         Assembly.GetAssembly(typeof(AccountConsumer))!)
     .AddVestnikServices();
 

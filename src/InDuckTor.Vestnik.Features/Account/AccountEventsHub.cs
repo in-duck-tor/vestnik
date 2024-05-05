@@ -8,20 +8,23 @@ using SignalRSwaggerGen.Attributes;
 
 namespace InDuckTor.Vestnik.Features.Account;
 
+public record RandomShit(string Message);
+
 public interface IAccountEventsHub
 {
     Task AccountCreated(AccountCreatedEvent @event, CancellationToken cancellationToken);
     Task AccountUpdated(AccountUpdatedEvent @event, CancellationToken ct);
     Task TransactionCreated(TransactionCreatedEvent @event, CancellationToken ct);
     Task TransactionUpdated(TransactionUpdatedEvent @event, CancellationToken ct);
+    Task Hueta(RandomShit @event, CancellationToken ct);
 }
 
 [SignalRHub]
-[Authorize]
 public class AccountEventsHub : Hub<IAccountEventsHub>
 {
     public static readonly ConcurrentDictionary<long, IList<string>> TransactionToAccounts = new();
 
+    [Authorize]
     public async Task SubscribeToMyAccounts(
         IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,
         CancellationToken cancellationToken)
@@ -36,6 +39,7 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
         }
     }
 
+    [Authorize]
     public async Task SubscribeAccounts(
         string[] accountsToSubscribe,
         IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,

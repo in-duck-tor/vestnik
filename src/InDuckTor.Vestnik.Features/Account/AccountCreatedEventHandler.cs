@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using InDuckTor.Account.Contracts.Public;
+using InDuckTor.Shared.Models;
 using InDuckTor.Shared.Strategies;
 using InDuckTor.Vestnik.Domain;
 using Microsoft.AspNetCore.SignalR;
@@ -98,5 +99,23 @@ public class TransactionUpdatedEventHandler : IMulticastCommandHandler<Transacti
             AccountEventsHub.TransactionToAccounts.TryRemove(@event.TransactionId, out _);
 
         return Result.Ok();
+    }
+}
+
+public interface IHueta : ICommand<Unit, Unit>;
+
+public class Hueta : IHueta
+{
+    private readonly IHubContext<AccountEventsHub, IAccountEventsHub> _hubContext;
+
+    public Hueta(IHubContext<AccountEventsHub, IAccountEventsHub> hubContext)
+    {
+        _hubContext = hubContext;
+    }
+
+    public Task<Unit> Execute(Unit input, CancellationToken ct)
+    {
+        _hubContext.Clients.All.Hueta(new("DopC"), ct);
+        return Task.FromResult(new Unit());
     }
 }
