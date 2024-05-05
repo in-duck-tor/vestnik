@@ -18,6 +18,8 @@ public static class HttpClientsConfiguration
     /// <param name="configuration">Секция конфигурации для http клиентов</param>
     public static IServiceCollection AddHttpClients(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddTransient<InDuckTorSystemTokenHandler>();
+        
         services.Configure<HttpClientConfiguration>(configuration.GetSection("Account"))
             .AddHttpClient<IAccountClient, AccountClient>((client, provider) =>
             {

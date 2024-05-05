@@ -46,5 +46,5 @@ public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<T
         return ProcessingResult.Ok;
     }
 
-    private static TransactionTarget MapTransactionTarget(TransactionStarted.Types.Target target) => new(target.AccountNumber, target.CurrencyCode, target.Amount, target.BankCode);
+    private static TransactionTarget MapTransactionTarget(TransactionStarted.Types.Target target) => new(target.AccountNumber, target.CurrencyCode, target.Amount, target.BankCode, target.AccountOwnerId);
 }

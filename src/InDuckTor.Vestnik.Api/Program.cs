@@ -1,6 +1,7 @@
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using InDuckTor.Account.Contracts.Public;
 using InDuckTor.Shared.Security;
-using InDuckTor.Shared.Security.Context;
 using InDuckTor.Shared.Security.Http;
 using InDuckTor.Shared.Security.Jwt;
 using InDuckTor.Shared.Strategies;
@@ -8,12 +9,14 @@ using InDuckTor.Shared.Utils;
 using InDuckTor.Vestnik.Api.Configuration;
 using InDuckTor.Vestnik.Api.Endpoints;
 using InDuckTor.Vestnik.Api.Services;
+using InDuckTor.Vestnik.Domain;
 using InDuckTor.Vestnik.Features.Account;
 using InDuckTor.Vestnik.Infrastructure.Database;
 using InDuckTor.Vestnik.Infrastructure.Firebase;
 using InDuckTor.Vestnik.Infrastructure.Kafka;
 using InDuckTor.Vestnik.Infrastructure.Kafka.Consumers;
 using Microsoft.AspNetCore.SignalR;
+using AccountType = InDuckTor.Shared.Security.Context.AccountType;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -23,13 +26,7 @@ services
     .AddInDuckTorAuthentication(configuration.GetSection(nameof(JwtSettings)))
     .AddInDuckTorSecurity()
     // for debug purposes
-    .AddAuthorization(options =>
-    {
-        options.AddPolicy("SystemAccess", policyBuilder =>
-        {
-            policyBuilder.RequireClaim(InDuckTorClaims.AccountType, AccountType.System.GetEnumMemberName());
-        });
-    });
+    .AddAuthorization(options => { options.AddPolicy("SystemAccess", policyBuilder => { policyBuilder.RequireClaim(InDuckTorClaims.AccountType, AccountType.System.GetEnumMemberName()); }); });
 
 services.AddCors(options =>
 {
@@ -56,8 +53,9 @@ services.AddLazyCache();
 services.AddFirebase(configuration.GetSection("Firebase"));
 
 services.AddStrategiesFrom(
-    Assembly.GetAssembly(typeof(AccountEventsHandler))!,
-    Assembly.GetAssembly(typeof(AccountConsumer))!);
+        Assembly.GetAssembly(typeof(AccountEventsHandler))!,
+        Assembly.GetAssembly(typeof(AccountConsumer))!)
+    .AddVestnikServices();
 
 services.ConfigureJsonConverters();
 services.AddEndpointsApiExplorer();

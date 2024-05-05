@@ -10,8 +10,8 @@
       <PackageReference Include="Confluent.SchemaRegistry.Serdes.Protobuf" Version="2.3.0" />
       <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
       <PackageReference Include="FirebaseAdmin" Version="2.4.1" />
-      <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.3.0" />
-      <PackageReference Include="InDuckTor.Shared" Version="2.2.7" />
+      <PackageReference Include="InDuckTor.Account.Contracts.Public" Version="1.3.4" />
+      <PackageReference Include="InDuckTor.Shared" Version="2.2.9" />
       <PackageReference Include="InDuckTor.Shared.Kafka" Version="1.3.3" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />

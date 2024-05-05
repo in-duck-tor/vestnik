@@ -10,9 +10,9 @@ public record AccountCreatedEvent(
     int CreatedById,
     (int id, AccountAction[] actions)[] GrantedUsers);
 
-public record AccountUpdatedEvent(string AccountNumber, AccountType AccountType, AccountState AccountState, int ChangedById);
+public record AccountUpdatedEvent(string AccountNumber, AccountType AccountType, AccountState AccountState, int ChangedById, int OwnerId);
 
-public record TransactionTarget(string AccountNumber, string CurrencyCode, decimal Amount, long BankCode);
+public record TransactionTarget(string AccountNumber, string CurrencyCode, decimal Amount, long BankCode, int? AccountOwnerId);
 
 public record TransactionCreatedEvent(
     long TransactionId,

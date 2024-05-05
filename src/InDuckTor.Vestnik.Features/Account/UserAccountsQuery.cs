@@ -15,7 +15,7 @@ public class UserAccountsQuery(IAccountClient accountClient, IAppCache cache) : 
 
     public async Task<IEnumerable<AccountDto>> Execute(GetUserAccountsArgs args, CancellationToken ct)
     {
-        return await cache.GetOrAddAsync(CreateUsersAccountsCacheKey(args.UserId),
+        return await cache.GetOrAddAsync(CreateUsersAccountsCacheKey(args.UserId), 
             async () =>
             {
                 var accounts = await accountClient.SearchAccountsAsync(
@@ -26,5 +26,6 @@ public class UserAccountsQuery(IAccountClient accountClient, IAppCache cache) : 
             TimeSpan.FromMinutes(CacheExpirationMinutes));
     }
 
+    // todo add cache invalidation on account events
     private static string CreateUsersAccountsCacheKey(int userId) => $"user/{userId}/accounts";
 }

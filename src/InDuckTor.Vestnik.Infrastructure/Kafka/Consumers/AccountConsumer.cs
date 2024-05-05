@@ -37,7 +37,8 @@ public class AccountConsumer(
                     envelop.AccountStateChanged.AccountNumber,
                     envelop.AccountStateChanged.Type,
                     envelop.AccountStateChanged.State,
-                    envelop.AccountStateChanged.ChangedById),
+                    envelop.AccountStateChanged.ChangedById,
+                    envelop.AccountStateChanged.OwnerId),
             _ => null
         };
 

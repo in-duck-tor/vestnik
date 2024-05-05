@@ -12,10 +12,6 @@ public class FirebaseConfiguration
 
 public static class DependencyRegistration
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Секция состоящая из ключей - id проектов в firebase и значений - <see cref="FirebaseConfiguration"/></param>
     /// <returns></returns>
@@ -32,7 +28,9 @@ public static class DependencyRegistration
 
         services
             .AddSingleton<InDuckTorBankFirebaseApp>()
-            .AddSingleton<IInDuckTorBankMessageSender, InDuckTorBankFirebaseMessageSender>();
+            .AddKeyedSingleton <IMessageSender, FirebaseMessageSender>(Domain.ApplicationVariant.ClientBank)
+            //todo .AddKeyedSingleton <IInDuckTorBankMessageSender, >(Domain.ApplicationVariant.EmployeeWebInterface)
+            ;
 
         return services;
     }
