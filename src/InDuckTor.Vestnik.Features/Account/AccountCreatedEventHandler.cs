@@ -115,7 +115,7 @@ public class Hueta : IHueta
 
     public Task<Unit> Execute(Unit input, CancellationToken ct)
     {
-        _hubContext.Clients.All.Hueta(new("DopC"), ct);
+        _hubContext.Clients.All.Hueta(new("Говно жопа хуй"), ct);
         return Task.FromResult(new Unit());
     }
 }
