@@ -28,6 +28,7 @@ public static class DependencyRegistration
                 config =>
                 {
                     config.AutoOffsetReset = AutoOffsetReset.Latest;
+                    // config.GroupId = "";
                 },
                 builder =>
                 {

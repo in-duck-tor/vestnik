@@ -1,4 +1,3 @@
-using InDuckTor.Vestnik.Features;
 using InDuckTor.Vestnik.Features.Account;
 
 namespace InDuckTor.Vestnik.Api.Endpoints;
@@ -12,7 +11,7 @@ public static class WebSocketEndpoints
             .WithOpenApi();
 
         groupBuilder.MapHub<AccountEventsHub>("account-events")
-            .WithOpenApi()
-            .RequireAuthorization();
+            .WithOpenApi();
+        // .RequireAuthorization();
     }
 }

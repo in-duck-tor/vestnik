@@ -30,6 +30,21 @@ services
             policyBuilder.RequireClaim(InDuckTorClaims.AccountType, AccountType.System.GetEnumMemberName());
         });
     });
+
+services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin
+            .WithOrigins("https://localhost:63343") // Allow only this origin can also have multiple origins separated with comma
+            .AllowCredentials();
+    });
+});
+
 services
     .AddSingleton<IUserIdProvider, InDuckTorUserIdProvider>()
     .AddSignalR();
@@ -57,6 +72,8 @@ if (!app.Environment.IsProduction())
 
     app.UseStaticFiles();
 }
+
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

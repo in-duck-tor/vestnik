@@ -1,6 +1,7 @@
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/api/v1/ws/vestnik/account-events", {
+    .withUrl("http://localhost:5057/api/v1/ws/vestnik/account-events", {
         accessTokenFactory: () => document.getElementById("accessTokenArea").value
+
     })
     .configureLogging(signalR.LogLevel.Information)
     .build();
@@ -23,6 +24,21 @@ connection.onclose(async () => {
     await start();
 });
 
+connection.on("ReceivePleasure", async () => {
+    console.log("Pleasure received");
+})
+
+let isConnected;
+
 // Start the connection.
-start();
+start().then(async r => {
+    isConnected = true
+}, r => {
+    console.log(`What the fuck??? ${r}`)
+});
+
+async function subscribeSosok() {
+    let sosochki = ["small", "medium", "large", "big"];
+    await connection.invoke("SubscribeSosok", sosochki);
+}
 

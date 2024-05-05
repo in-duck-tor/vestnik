@@ -13,22 +13,13 @@ public interface IAccountEventsHub
     Task AccountUpdatedEvent(AccountUpdatedEvent @event, CancellationToken ct);
     Task TransactionCreatedEvent(TransactionCreatedEvent @event, CancellationToken ct);
     Task TransactionUpdatedEvent(TransactionUpdatedEvent @event, CancellationToken ct);
+    Task ReceivePleasure();
 }
 
 [SignalRHub]
-[Authorize]
 public class AccountEventsHub : Hub<IAccountEventsHub>
 {
-    public override Task OnConnectedAsync()
-    {
-        return base.OnConnectedAsync();
-    }
-
-    public override Task OnDisconnectedAsync(Exception? exception)
-    {
-        return base.OnDisconnectedAsync(exception);
-    }
-
+    [Authorize]
     public async Task SubscribeToMyAccounts(
         IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,
         CancellationToken cancellationToken)
@@ -43,6 +34,19 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
         }
     }
 
+    public async Task SubscribeSosok(string[] sosochki)
+    {
+        Console.WriteLine("Subscribe Sosok method started");
+        foreach (var s in sosochki)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, s);
+        }
+
+        Console.WriteLine("Calling client's method");
+        await Clients.Groups(sosochki).ReceivePleasure();
+    }
+
+    [Authorize]
     public async Task SubscribeAccounts(
         string[] accountsToSubscribe,
         IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,

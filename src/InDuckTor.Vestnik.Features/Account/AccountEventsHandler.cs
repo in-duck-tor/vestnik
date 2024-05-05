@@ -20,12 +20,12 @@ public class AccountEventsHandler :
 
     public async Task<Result> Execute(AccountCreatedEvent @event, CancellationToken ct)
     {
-        var clientProxy = _hubContext.Clients.Users(
-            @event.GrantedUsers
-                .Select(user => user.id)
-                .Append(@event.CreatedById)
-                .Append(@event.OwnerId)
-                .Select(userId => userId.ToString()));
+        var userIds = @event.GrantedUsers
+            .Select(user => user.id)
+            .Append(@event.CreatedById)
+            .Append(@event.OwnerId)
+            .Select(userId => userId.ToString());
+        var clientProxy = _hubContext.Clients.Users(userIds);
 
         await clientProxy.AccountCreated(@event, ct);
 
@@ -34,13 +34,27 @@ public class AccountEventsHandler :
 
     public async Task<Result> Execute(AccountUpdatedEvent @event, CancellationToken ct)
     {
-        _hubContext.Clients.Clients(default!);
+        var clientProxy = _hubContext.Clients.Group(AccountGroup.GetAccountGroupName(@event.AccountNumber));
+        await clientProxy.AccountUpdatedEvent(@event, ct);
         return Result.Ok();
     }
 
     public async Task<Result> Execute(TransactionCreatedEvent @event, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        var clientProxy1 = @event.DepositOn == null
+            ? null
+            : _hubContext.Clients.Group(AccountGroup.GetAccountGroupName(@event.DepositOn.AccountNumber));
+        var clientProxy2 = @event.WithdrawFrom == null
+            ? null
+            : _hubContext.Clients.Group(AccountGroup.GetAccountGroupName(@event.WithdrawFrom.AccountNumber));
+
+        var task1 = clientProxy1?.TransactionCreatedEvent(@event, ct);
+        var task2 = clientProxy2?.TransactionCreatedEvent(@event, ct);
+
+        if (task1 != null) await task1;
+        if (task2 != null) await task2;
+
+        return Result.Ok();
     }
 
     public async Task<Result> Execute(TransactionUpdatedEvent @event, CancellationToken ct)
