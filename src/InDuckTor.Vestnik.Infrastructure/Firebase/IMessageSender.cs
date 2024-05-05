@@ -10,8 +10,11 @@ public interface IMessageSender
     public readonly record struct BatchSendResult(
         IReadOnlyCollection<SuccessfulDispatch> SuccessfulDispatches,
         IReadOnlyCollection<ClientAppRegistration> FailedDispatchRegistrations,
-        IReadOnlyCollection<ClientAppRegistration> UnprocessableRegistrations
-    );
+        IReadOnlyCollection<ClientAppRegistration> UnprocessableRegistrations)
+    {
+        public BatchSendResult()
+            : this(Array.Empty<SuccessfulDispatch>(), Array.Empty<ClientAppRegistration>(), Array.Empty<ClientAppRegistration>()) { }
+    }
 
     public Task<string> SendSimpleNotification(NotificationDataBase notificationData, ClientAppRegistration registration, CancellationToken ct);
 

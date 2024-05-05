@@ -31,7 +31,9 @@ internal class FirebaseMessageSender : IMessageSender
 
     public async Task<IMessageSender.BatchSendResult> SendSimpleNotification(NotificationDataBase notificationData, IEnumerable<ClientAppRegistration> registrations, CancellationToken ct)
     {
-        var registrationsCollection = registrations as IReadOnlyCollection<ClientAppRegistration> ?? registrations.ToList(); 
+        var registrationsCollection = registrations as IReadOnlyCollection<ClientAppRegistration> ?? registrations.ToList();
+        if (registrationsCollection.Count == 0) return new IMessageSender.BatchSendResult();
+        
         var multicastMessage = new MulticastMessage
         {
             Tokens = registrationsCollection.Select(x => x.RegistrationToken).ToList(),
@@ -45,6 +47,8 @@ internal class FirebaseMessageSender : IMessageSender
     public async Task<IMessageSender.BatchSendResult> SendManySimpleNotifications(IEnumerable<(ClientAppRegistration registration, NotificationDataBase data)> notifications, CancellationToken ct)
     {
         var notificationsCollection = notifications as IReadOnlyCollection<(ClientAppRegistration registration, NotificationDataBase data)> ?? notifications.ToList();
+        if (notificationsCollection.Count == 0) return new IMessageSender.BatchSendResult();
+        
         var batchResponse = await _firebaseMessaging.SendEachAsync(
             notificationsCollection.Select(x => new Message
             {
