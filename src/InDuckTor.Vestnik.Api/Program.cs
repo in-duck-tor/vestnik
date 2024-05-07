@@ -79,14 +79,11 @@ services.AddCors(options =>
 {
     options.AddDefaultPolicy(policyBuilder =>
     {
-        policyBuilder
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .SetIsOriginAllowed(origin => true) // allow any origin
-            .WithOrigins(
-                "https://localhost:63343") // Allow only this origin can also have multiple origins separated with comma
+        policyBuilder.AllowAnyMethod().AllowAnyHeader()
+            .SetIsOriginAllowed(_ => true)
             .AllowCredentials();
+
+        // .WithOrigins("https://localhost:63343", "http://localhost:63343");
     });
 });
 
