@@ -20,7 +20,7 @@ public interface IAccountEventsHub
 }
 
 [SignalRHub]
-[Authorize]
+[Authorize(AuthenticationSchemes = "Signalr")]
 public class AccountEventsHub : Hub<IAccountEventsHub>
 {
     public static readonly ConcurrentDictionary<long, IList<string>> TransactionToAccounts = new();
@@ -30,6 +30,18 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
     public AccountEventsHub(IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts)
     {
         _getUserAccounts = getUserAccounts;
+    }
+
+    public override Task OnConnectedAsync()
+    {
+        Console.WriteLine($"Connecting, id: {Context.ConnectionId}");
+        return base.OnConnectedAsync();
+    }
+
+    public override Task OnDisconnectedAsync(Exception? exception)
+    {
+        Console.WriteLine($"Disconnecting, id: {Context.ConnectionId}");
+        return base.OnDisconnectedAsync(exception);
     }
 
     public async Task SubscribeToMyAccounts()

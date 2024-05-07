@@ -14,8 +14,8 @@ public static class WebSocketEndpoints
             .WithOpenApi();
 
         groupBuilder.MapHub<AccountEventsHub>("account-events")
-            .WithOpenApi();
-            // .RequireAuthorization();
+            .WithOpenApi()
+            .RequireAuthorization();
 
         groupBuilder.MapGet("hueta", Hueta);
     }
