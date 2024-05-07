@@ -38,7 +38,7 @@ connection.on("TransactionUpdated", async (event) => {
 });
 
 connection.on("Hueta", async (event) => {
-    console.log(`Hueta: ${event}`);
+    console.log(`Hueta: ${JSON.stringify(event)}`);
 });
 
 let isConnected;
@@ -46,7 +46,7 @@ let isConnected;
 // Start the connection.
 start().then(async r => {
     isConnected = true
-    await subscribeToMyAccounts()
+    // await subscribeToMyAccounts()
 }, r => {
     console.log(`What the fuck??? ${r}`)
 });

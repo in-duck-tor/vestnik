@@ -19,7 +19,7 @@ public class UserAccountsQuery(IAccountClient accountClient, IAppCache cache) : 
             async () =>
             {
                 var accounts = await accountClient.SearchAccountsAsync(
-                    new AccountsSearchParams { OwnerId = args.UserId, Take = 1000 }, 
+                    new() { OwnerId = args.UserId, Take = 1000 }, 
                     ct);
                 return accounts.Items ?? Array.Empty<AccountDto>();
             },

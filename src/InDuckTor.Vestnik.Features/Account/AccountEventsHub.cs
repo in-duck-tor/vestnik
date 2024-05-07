@@ -20,26 +20,31 @@ public interface IAccountEventsHub
 }
 
 [SignalRHub]
+[Authorize]
 public class AccountEventsHub : Hub<IAccountEventsHub>
 {
     public static readonly ConcurrentDictionary<long, IList<string>> TransactionToAccounts = new();
 
-    [Authorize]
-    public async Task SubscribeToMyAccounts(
-        IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,
-        CancellationToken cancellationToken)
+    private readonly IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> _getUserAccounts;
+
+    public AccountEventsHub(IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts)
+    {
+        _getUserAccounts = getUserAccounts;
+    }
+
+    public async Task SubscribeToMyAccounts()
     {
         if (!int.TryParse(Context.UserIdentifier, out var userId)) return;
-        var accountDtos = await getUserAccounts.Execute(new(userId), cancellationToken);
+        var ct = new CancellationToken();
+        var accountDtos = await _getUserAccounts.Execute(new(userId), ct);
 
         foreach (var accountDto in accountDtos)
         {
             if (accountDto.Number == null) continue;
-            await Groups.AddToAccountGroup(Context.ConnectionId, accountDto.Number, cancellationToken);
+            await Groups.AddToAccountGroup(Context.ConnectionId, accountDto.Number, ct);
         }
     }
 
-    [Authorize]
     public async Task SubscribeAccounts(
         string[] accountsToSubscribe,
         IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,
