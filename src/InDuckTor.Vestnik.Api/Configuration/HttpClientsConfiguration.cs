@@ -23,9 +23,9 @@ public static class HttpClientsConfiguration
         services.Configure<HttpClientConfiguration>(configuration.GetSection("Account"))
             .AddHttpClient<IAccountClient, AccountClient>((client, provider) =>
             {
-                // var config = provider.GetRequiredService<IOptionsSnapshot<HttpClientConfiguration>>();
-                // return new(config.Value.BaseUrl.ToString(), client);
-                return new(client);
+                var config = provider.GetRequiredService<IOptionsSnapshot<HttpClientConfiguration>>();
+                return new(config.Value.BaseUrl.ToString(), client);
+                // return new(client);
             })
             .AddHttpMessageHandler<InDuckTorSystemTokenHandler>();
 

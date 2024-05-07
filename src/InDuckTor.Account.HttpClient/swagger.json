@@ -4,12 +4,6 @@
     "title": "InDuckTor.Account.WebApi",
     "version": "1.0"
   },
-  "servers": [
-    {
-      "url": "http://89.19.214.8/",
-      "description": "Main server"
-    }
-  ],
   "paths": {
     "/api/v1/account": {
       "get": {

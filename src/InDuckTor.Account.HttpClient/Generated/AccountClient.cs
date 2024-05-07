@@ -417,10 +417,10 @@ namespace InDuckTor.Account.HttpClient
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public AccountClient(System.Net.Http.HttpClient httpClient)
+        public AccountClient(string baseUrl, System.Net.Http.HttpClient httpClient)
     #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            BaseUrl = "http://89.19.214.8/";
+            BaseUrl = baseUrl;
             _httpClient = httpClient;
         }
 
