@@ -3,8 +3,8 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "X:/Users/vsuha/Programming/RiderProjects/in-duck-tor/vestnik/src/InDuckTor.Account.HttpClient/swagger.json",
-//      "url": "http://89.19.214.8/swagger/docs/v1/account",
+      "url": "http://89.19.214.8/swagger/docs/v1/account",
+//      "url": "X:/Users/vsuha/Programming/RiderProjects/in-duck-tor/vestnik/src/InDuckTor.Account.HttpClient/swagger.json",
       "output": "swagger.json",
       "newLineBehavior": "Auto"
     }
