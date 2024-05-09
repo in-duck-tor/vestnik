@@ -20,7 +20,10 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 var jwtConfig = configuration.GetSection(nameof(JwtSettings));
-services.ConfigureSignalR(nameof(configuration), jwtConfig);
+var jwtSettings = jwtConfig.Get<JwtSettings>() ??
+                  throw new ArgumentException("Невозможно извлечь настройки JWT из конфигурации",
+                      nameof(configuration));
+services.ConfigureSignalR(jwtSettings);
 
 services
     .AddInDuckTorAuthentication(jwtConfig)

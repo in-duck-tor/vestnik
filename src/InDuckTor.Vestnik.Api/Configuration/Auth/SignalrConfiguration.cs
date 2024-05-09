@@ -8,17 +8,12 @@ public static class SignalrConfiguration
 {
     public static void ConfigureSignalR(
         this IServiceCollection serviceCollection,
-        string configurationName,
-        IConfigurationSection jwtConfig)
+        JwtSettings jwtSettings)
     {
         serviceCollection
             .AddAuthentication()
             .AddJwtBearer("Signalr", options =>
             {
-                var jwtSettings = jwtConfig.Get<JwtSettings>() ??
-                                  throw new ArgumentException("Невозможно извлечь настройки JWT из конфигурации",
-                                      configurationName);
-
                 options.TokenValidationParameters = TokenValidationFactory.CreateTokenValidationParameters(jwtSettings);
                 options.Events = new()
                 {

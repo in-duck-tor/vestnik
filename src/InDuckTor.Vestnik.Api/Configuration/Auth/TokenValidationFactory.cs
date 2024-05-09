@@ -19,14 +19,7 @@ internal static class TokenValidationFactory
             RequireExpirationTime = true,
             ValidIssuer = settings.Issuer,
             ValidAudience = settings.Audience,
-            IssuerSigningKey = settings.OmitSignature
-                ? null
-                : settings.SignatureType == EncryptionType.Asymmetric
-                    ? RsaKeyGenerator.GenerateKey(settings.SecretKeyPath)
-                    : new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.SecretKey)),
-            SignatureValidator = settings.OmitSignature
-                ? (token, _) => new JsonWebToken(token)
-                : null
+            IssuerSigningKey = null
         };
     }
 }

@@ -538,6 +538,17 @@
         ],
         "description": "Открыть новый счёт для текущего пользователя",
         "operationId": "OpenNewPaymentAccountV2",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -571,6 +582,15 @@
             "schema": {
               "$ref": "#/components/schemas/AccountNumber"
             }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -595,6 +615,15 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/AccountNumber"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -621,6 +650,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -637,6 +675,17 @@
         ],
         "description": "Совершить трансакцию по счёту текущего пользователя",
         "operationId": "MakeTransactionV2",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -661,6 +710,17 @@
         ],
         "description": "Отправляет команду на создание счёта. Только для внешних клиентов",
         "operationId": "CreateAccountV2",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -685,6 +745,17 @@
         ],
         "description": "Отправляет команду на начало трансакции между счётами. Только для внешних клиентов",
         "operationId": "OpenTransactionV2",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -709,6 +780,17 @@
         ],
         "description": "Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов",
         "operationId": "CancelTransactionV2",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -733,6 +815,17 @@
         ],
         "description": "Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов",
         "operationId": "CommitTransactionV2",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "style": "simple",
+            "description": "Ключ идемпотентности",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {

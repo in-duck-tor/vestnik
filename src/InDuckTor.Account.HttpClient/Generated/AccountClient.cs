@@ -272,137 +272,155 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Открыть новый счёт для текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body);
+        System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(string? idempotency_Key, OpenPaymentAccountRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Открыть новый счёт для текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(string? idempotency_Key, OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Запрос пользователя закрыть счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber);
+        System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, string? idempotency_Key);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Запрос пользователя закрыть счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, string? idempotency_Key, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Запрос пользователя заморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber);
+        System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, string? idempotency_Key);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Запрос пользователя заморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, string? idempotency_Key, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Запрос пользователя разморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber);
+        System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, string? idempotency_Key);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Запрос пользователя разморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, string? idempotency_Key, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Совершить трансакцию по счёту текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body);
+        System.Threading.Tasks.Task MakeTransactionV2Async(string? idempotency_Key, NewTransactionRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Совершить трансакцию по счёту текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task MakeTransactionV2Async(string? idempotency_Key, NewTransactionRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Отправляет команду на создание счёта. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body);
+        System.Threading.Tasks.Task CreateAccountV2Async(string? idempotency_Key, CreateAccountRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на создание счёта. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task CreateAccountV2Async(string? idempotency_Key, CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body);
+        System.Threading.Tasks.Task OpenTransactionV2Async(string? idempotency_Key, OpenTransactionRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task OpenTransactionV2Async(string? idempotency_Key, OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body);
+        System.Threading.Tasks.Task CancelTransactionV2Async(string? idempotency_Key, CreateAccountRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task CancelTransactionV2Async(string? idempotency_Key, CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <remarks>
         /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body);
+        System.Threading.Tasks.Task CommitTransactionV2Async(string? idempotency_Key, CreateAccountRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task CommitTransactionV2Async(string? idempotency_Key, CreateAccountRequest body, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -1922,20 +1940,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Открыть новый счёт для текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body)
+        public virtual System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(string? idempotency_Key, OpenPaymentAccountRequest body)
         {
-            return OpenNewPaymentAccountV2Async(body, System.Threading.CancellationToken.None);
+            return OpenNewPaymentAccountV2Async(idempotency_Key, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Открыть новый счёт для текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task OpenNewPaymentAccountV2Async(string? idempotency_Key, OpenPaymentAccountRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -1946,6 +1966,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -2007,20 +2030,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Запрос пользователя закрыть счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber)
+        public virtual System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, string? idempotency_Key)
         {
-            return CloseAccountV2Async(accountNumber, System.Threading.CancellationToken.None);
+            return CloseAccountV2Async(accountNumber, idempotency_Key, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Запрос пользователя закрыть счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task CloseAccountV2Async(string accountNumber, string? idempotency_Key, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
                 throw new System.ArgumentNullException("accountNumber");
@@ -2031,6 +2056,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
 
@@ -2091,20 +2119,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Запрос пользователя заморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber)
+        public virtual System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, string? idempotency_Key)
         {
-            return FreezeAccountV2Async(accountNumber, System.Threading.CancellationToken.None);
+            return FreezeAccountV2Async(accountNumber, idempotency_Key, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Запрос пользователя заморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task FreezeAccountV2Async(string accountNumber, string? idempotency_Key, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
                 throw new System.ArgumentNullException("accountNumber");
@@ -2115,6 +2145,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -2175,20 +2208,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Запрос пользователя разморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber)
+        public virtual System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, string? idempotency_Key)
         {
-            return UnfreezeAccountV2Async(accountNumber, System.Threading.CancellationToken.None);
+            return UnfreezeAccountV2Async(accountNumber, idempotency_Key, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Запрос пользователя разморозить счёт
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task UnfreezeAccountV2Async(string accountNumber, string? idempotency_Key, System.Threading.CancellationToken cancellationToken)
         {
             if (accountNumber == null)
                 throw new System.ArgumentNullException("accountNumber");
@@ -2199,6 +2234,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -2259,20 +2297,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Совершить трансакцию по счёту текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body)
+        public virtual System.Threading.Tasks.Task MakeTransactionV2Async(string? idempotency_Key, NewTransactionRequest body)
         {
-            return MakeTransactionV2Async(body, System.Threading.CancellationToken.None);
+            return MakeTransactionV2Async(idempotency_Key, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Совершить трансакцию по счёту текущего пользователя
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task MakeTransactionV2Async(NewTransactionRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task MakeTransactionV2Async(string? idempotency_Key, NewTransactionRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -2283,6 +2323,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -2344,20 +2387,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Отправляет команду на создание счёта. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body)
+        public virtual System.Threading.Tasks.Task CreateAccountV2Async(string? idempotency_Key, CreateAccountRequest body)
         {
-            return CreateAccountV2Async(body, System.Threading.CancellationToken.None);
+            return CreateAccountV2Async(idempotency_Key, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на создание счёта. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CreateAccountV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task CreateAccountV2Async(string? idempotency_Key, CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -2368,6 +2413,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -2429,20 +2477,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body)
+        public virtual System.Threading.Tasks.Task OpenTransactionV2Async(string? idempotency_Key, OpenTransactionRequest body)
         {
-            return OpenTransactionV2Async(body, System.Threading.CancellationToken.None);
+            return OpenTransactionV2Async(idempotency_Key, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на начало трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task OpenTransactionV2Async(OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task OpenTransactionV2Async(string? idempotency_Key, OpenTransactionRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -2453,6 +2503,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -2514,20 +2567,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body)
+        public virtual System.Threading.Tasks.Task CancelTransactionV2Async(string? idempotency_Key, CreateAccountRequest body)
         {
-            return CancelTransactionV2Async(body, System.Threading.CancellationToken.None);
+            return CancelTransactionV2Async(idempotency_Key, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на отмену трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CancelTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task CancelTransactionV2Async(string? idempotency_Key, CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -2538,6 +2593,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -2600,20 +2658,22 @@ namespace InDuckTor.Account.HttpClient
         /// <remarks>
         /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body)
+        public virtual System.Threading.Tasks.Task CommitTransactionV2Async(string? idempotency_Key, CreateAccountRequest body)
         {
-            return CommitTransactionV2Async(body, System.Threading.CancellationToken.None);
+            return CommitTransactionV2Async(idempotency_Key, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <remarks>
         /// Отправляет команду на фисацию трансакции между счётами. Только для внешних клиентов
         /// </remarks>
+        /// <param name="idempotency_Key">Ключ идемпотентности</param>
         /// <returns>Accepted</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CommitTransactionV2Async(CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task CommitTransactionV2Async(string? idempotency_Key, CreateAccountRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -2624,6 +2684,9 @@ namespace InDuckTor.Account.HttpClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+
+                    if (idempotency_Key != null)
+                        request_.Headers.TryAddWithoutValidation("Idempotency-Key", ConvertToString(idempotency_Key, System.Globalization.CultureInfo.InvariantCulture));
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
