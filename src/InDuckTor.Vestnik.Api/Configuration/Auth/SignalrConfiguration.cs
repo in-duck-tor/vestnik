@@ -17,14 +17,16 @@ public static class SignalrConfiguration
                 options.TokenValidationParameters = TokenValidationFactory.CreateTokenValidationParameters(jwtSettings);
                 options.Events = new()
                 {
-                    OnAuthenticationFailed = _ =>
+                    OnAuthenticationFailed = context =>
                     {
-                        Console.WriteLine("\nSignalr auth failed\n");
+                        var request = context.HttpContext.Request;
+                        Console.WriteLine($"Signalr auth failed for path {request.Path + request.QueryString}");
                         return Task.CompletedTask;
                     },
-                    OnTokenValidated = _ =>
+                    OnTokenValidated = context =>
                     {
-                        Console.WriteLine("\nSignalr auth validated\n");
+                        var request = context.HttpContext.Request;
+                        Console.WriteLine($"Signalr auth succeed for path {request.Path + request.QueryString}");
                         return Task.CompletedTask;
                     },
                     OnMessageReceived = context =>
