@@ -41,6 +41,7 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
     public override Task OnDisconnectedAsync(Exception? exception)
     {
         Console.WriteLine($"Disconnecting, id: {Context.ConnectionId}");
+        Console.WriteLine(exception?.Message);
         return base.OnDisconnectedAsync(exception);
     }
 
