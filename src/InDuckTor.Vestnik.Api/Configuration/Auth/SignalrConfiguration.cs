@@ -1,3 +1,4 @@
+using System.Text;
 using InDuckTor.Shared.Security.Jwt;
 using InDuckTor.Vestnik.Api.Services;
 using Microsoft.AspNetCore.SignalR;

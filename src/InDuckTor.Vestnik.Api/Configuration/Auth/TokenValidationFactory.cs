@@ -1,4 +1,3 @@
-using System.Text;
 using InDuckTor.Shared.Security.Jwt;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
@@ -19,7 +18,10 @@ internal static class TokenValidationFactory
             RequireExpirationTime = true,
             ValidIssuer = settings.Issuer,
             ValidAudience = settings.Audience,
-            IssuerSigningKey = null
+            IssuerSigningKey = null,
+            SignatureValidator = settings.OmitSignature
+                ? (token, _) => new JsonWebToken(token)
+                : null
         };
     }
 }
