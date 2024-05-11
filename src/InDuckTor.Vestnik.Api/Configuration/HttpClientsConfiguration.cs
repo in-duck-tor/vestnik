@@ -1,6 +1,5 @@
 ﻿using InDuckTor.Account.HttpClient;
 using InDuckTor.Vestnik.Api.Services;
-using Microsoft.Extensions.Http.Logging;
 using Microsoft.Extensions.Options;
 
 namespace InDuckTor.Vestnik.Api.Configuration;
