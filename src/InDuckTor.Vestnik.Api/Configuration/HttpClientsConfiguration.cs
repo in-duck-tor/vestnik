@@ -1,5 +1,6 @@
 ﻿using InDuckTor.Account.HttpClient;
 using InDuckTor.Vestnik.Api.Services;
+using Microsoft.Extensions.Http.Logging;
 using Microsoft.Extensions.Options;
 
 namespace InDuckTor.Vestnik.Api.Configuration;
@@ -19,7 +20,7 @@ public static class HttpClientsConfiguration
     public static IServiceCollection AddHttpClients(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<InDuckTorSystemTokenHandler>();
-        
+
         services.Configure<HttpClientConfiguration>(configuration.GetSection("Account"))
             .AddHttpClient<IAccountClient, AccountClient>((client, provider) =>
             {
