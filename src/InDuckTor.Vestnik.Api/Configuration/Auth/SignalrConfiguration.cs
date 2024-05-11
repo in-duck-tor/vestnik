@@ -1,4 +1,3 @@
-using System.Text;
 using InDuckTor.Shared.Security.Jwt;
 using InDuckTor.Vestnik.Api.Services;
 using Microsoft.AspNetCore.SignalR;
@@ -7,13 +6,15 @@ namespace InDuckTor.Vestnik.Api.Configuration.Auth;
 
 public static class SignalrConfiguration
 {
+    public const string ProviderKey = "Signalr";
+
     public static void ConfigureSignalR(
         this IServiceCollection serviceCollection,
         JwtSettings jwtSettings)
     {
         serviceCollection
             .AddAuthentication()
-            .AddJwtBearer("Signalr", options =>
+            .AddJwtBearer(ProviderKey, options =>
             {
                 options.TokenValidationParameters = TokenValidationFactory.CreateTokenValidationParameters(jwtSettings);
                 options.Events = new()

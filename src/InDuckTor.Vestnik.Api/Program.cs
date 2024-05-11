@@ -32,7 +32,7 @@ services
     // for debug purposes
     .SetDefaultPolicy(new AuthorizationPolicyBuilder()
         .RequireAuthenticatedUser()
-        .AddAuthenticationSchemes("Bearer", "Signalr")
+        .AddAuthenticationSchemes("Bearer", SignalrConfiguration.ProviderKey)
         .Build())
     .AddPolicy("SystemAccess",
         policyBuilder =>
