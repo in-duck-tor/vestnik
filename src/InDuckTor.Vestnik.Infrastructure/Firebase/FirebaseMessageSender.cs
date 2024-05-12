@@ -83,14 +83,14 @@ internal class FirebaseMessageSender : IMessageSender
 
             if (response.Exception is { MessagingErrorCode: MessagingErrorCode.Unregistered or MessagingErrorCode.SenderIdMismatch }) // todo : maybe other reasons 
             {
-                AddItem(ref failedDispatchRegistrations, registration);
+                AddItem(ref unprocessableRegistrations, registration);
             }
             else
             {
-                AddItem(ref unprocessableRegistrations, registration);
+                AddItem(ref failedDispatchRegistrations, registration);
             }
 
-            _logger.LogDebug(response.Exception, "Не удалось отправить сообщение в Firebase по токену {RegistrationTopic}", registration);
+            _logger.LogDebug(response.Exception, "Не удалось отправить сообщение в Firebase по токену {RegistrationToken}; {MessagingErrorCode}", registration.RegistrationToken, response.Exception.MessagingErrorCode);
         }
 
         _logger.LogInformation("Результат отправки сообщений в Firebase : удачно - {SuccessCount}; с ошибкой - {FailureCount}", batchResponse.SuccessCount, batchResponse.FailureCount);
