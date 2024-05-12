@@ -66,7 +66,7 @@ public class TransactionCreatedEventHandler : IMulticastCommandHandler<Transacti
     public async Task<Result> Execute(TransactionCreatedEvent @event, CancellationToken ct)
     {
         _logger.Log(LogLevel.Debug, "Start processing TransactionCreatedEvent");
-        
+
         List<string> accounts = [];
 
         if (@event.DepositOn != null)
@@ -74,22 +74,27 @@ public class TransactionCreatedEventHandler : IMulticastCommandHandler<Transacti
             accounts.Add(@event.DepositOn.AccountNumber);
             _logger.Log(LogLevel.Debug, "Added deposit account");
         }
+
         if (@event.WithdrawFrom != null)
         {
             accounts.Add(@event.WithdrawFrom.AccountNumber);
             _logger.Log(LogLevel.Debug, "Added withdraw account");
         }
-        
+
         _logger.Log(LogLevel.Debug, "Invoking TransactionCreated client method");
-        
+
         await Task.WhenAll(accounts.Select(account => _hubContext.Clients
             .Group(AccountGroup.GetGroupName(account))
             .TransactionCreated(@event, ct)
         ));
 
         _logger.Log(LogLevel.Debug, "TransactionCreated client method finished");
-        
-        AccountEventsHub.TransactionToAccounts.TryAdd(@event.TransactionId, accounts);
+
+        if (!AccountEventsHub.TransactionToAccounts.TryAdd(@event.TransactionId, accounts))
+        {
+            _logger.Log(LogLevel.Error,
+                "НЕ ПОЛУЧИЛОСЬ ДОБАВИТЬ АККАУНТЫ В ТРАНЗАКЦИЮ. TransactionId: {}", @event.TransactionId);
+        }
 
         return Result.Ok();
     }
