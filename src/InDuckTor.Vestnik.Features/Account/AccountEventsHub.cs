@@ -3,6 +3,7 @@ using InDuckTor.Account.HttpClient;
 using InDuckTor.Shared.Strategies;
 using InDuckTor.Vestnik.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SignalRSwaggerGen.Attributes;
 
@@ -25,13 +26,6 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
 {
     public static readonly ConcurrentDictionary<long, IList<string>> TransactionToAccounts = new();
 
-    private readonly IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> _getUserAccounts;
-
-    public AccountEventsHub(IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts)
-    {
-        _getUserAccounts = getUserAccounts;
-    }
-
     public override Task OnConnectedAsync()
     {
         Console.WriteLine($"Connecting, id: {Context.ConnectionId}");
@@ -45,11 +39,12 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
         return base.OnDisconnectedAsync(exception);
     }
 
-    public async Task SubscribeToMyAccounts()
+    public async Task SubscribeToMyAccounts(
+        [FromServices] IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts)
     {
         if (!int.TryParse(Context.UserIdentifier, out var userId)) return;
         var ct = new CancellationToken();
-        var accountDtos = await _getUserAccounts.Execute(new(userId), ct);
+        var accountDtos = await getUserAccounts.Execute(new(userId), ct);
 
         foreach (var accountDto in accountDtos)
         {
@@ -58,30 +53,13 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
         }
     }
 
-    public async Task SubscribeAccounts(
-        string[] accountsToSubscribe,
-        IExecutor<IUserAccountsQuery, GetUserAccountsArgs, IEnumerable<AccountDto>> getUserAccounts,
-        CancellationToken cancellationToken)
+    // TODO: проверить роль
+    public async Task SubscribeAccounts(IEnumerable<string> accountsToSubscribe)
     {
-        throw new NotImplementedException();
-
-        if (int.TryParse(Context.UserIdentifier, out var userId)) return;
-        var accountDtos = await getUserAccounts.Execute(new(userId), cancellationToken);
-
-        foreach (var accountDto in accountDtos)
+        var ct = new CancellationToken();
+        foreach (var account in accountsToSubscribe)
         {
-            await Groups.AddToAccountGroup(Context.ConnectionId, accountDto.Number, cancellationToken);
-        }
-    }
-
-    public static void Main()
-    {
-        ConcurrentDictionary<long, IList<string>> transactionToAccounts = new();
-        if (!transactionToAccounts.TryAdd(1, ["a", "b"])) return;
-
-        foreach (var value in transactionToAccounts[1])
-        {
-            Console.WriteLine(value);
+            await Groups.AddToAccountGroup(Context.ConnectionId, account, ct);
         }
     }
 }
