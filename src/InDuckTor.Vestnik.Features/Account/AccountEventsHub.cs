@@ -73,4 +73,15 @@ public class AccountEventsHub : Hub<IAccountEventsHub>
             await Groups.AddToAccountGroup(Context.ConnectionId, accountDto.Number, cancellationToken);
         }
     }
+
+    public static void Main()
+    {
+        ConcurrentDictionary<long, IList<string>> transactionToAccounts = new();
+        if (!transactionToAccounts.TryAdd(1, ["a", "b"])) return;
+
+        foreach (var value in transactionToAccounts[1])
+        {
+            Console.WriteLine(value);
+        }
+    }
 }

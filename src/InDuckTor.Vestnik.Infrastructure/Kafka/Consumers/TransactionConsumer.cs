@@ -2,7 +2,6 @@ using Confluent.Kafka;
 using InDuckTor.Account.Contracts.Public;
 using InDuckTor.Shared.Kafka;
 using InDuckTor.Shared.Strategies;
-using InDuckTor.Shared.Utils;
 using InDuckTor.Vestnik.Domain;
 using Microsoft.Extensions.Logging;
 
@@ -49,7 +48,7 @@ public class TransactionConsumer(IMulticastExecutor multicastExecutor, ILogger<T
         return ProcessingResult.Ok;
     }
 
-    private static TransactionTarget? MapTransactionTarget(TransactionStarted.Types.Target? target) => target == null
+     private static TransactionTarget? MapTransactionTarget(TransactionStarted.Types.Target? target) => target == null
         ? null
         : new(target.AccountNumber, target.CurrencyCode, target.Amount, target.BankCode, target.AccountOwnerId);
 }

@@ -60,7 +60,6 @@ services.AddFirebase(configuration.GetSection("Firebase"));
 
 services.AddStrategiesFrom(
         Assembly.GetAssembly(typeof(AccountCreatedEventHandler))!,
-        Assembly.GetAssembly(typeof(IHueta))!,
         Assembly.GetAssembly(typeof(AccountConsumer))!)
     .AddVestnikServices();
 

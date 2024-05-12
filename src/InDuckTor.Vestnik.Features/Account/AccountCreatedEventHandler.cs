@@ -1,4 +1,4 @@
-﻿using FluentResults;
+using FluentResults;
 using InDuckTor.Account.Contracts.Public;
 using InDuckTor.Shared.Models;
 using InDuckTor.Shared.Strategies;
@@ -83,10 +83,9 @@ public class TransactionCreatedEventHandler : IMulticastCommandHandler<Transacti
 
         _logger.Log(LogLevel.Debug, "Invoking TransactionCreated client method");
 
-        await Task.WhenAll(accounts.Select(account => _hubContext.Clients
-            .Group(AccountGroup.GetGroupName(account))
-            .TransactionCreated(@event, ct)
-        ));
+        await _hubContext.Clients
+            .Groups(accounts.Select(AccountGroup.GetGroupName))
+            .TransactionCreated(@event, ct);
 
         _logger.Log(LogLevel.Debug, "TransactionCreated client method finished");
 
