@@ -47,7 +47,7 @@ public class TransactionClientMessageFactory
         var stringBuilder = StringBuilders.Get();
 
         stringBuilder.Append("Ваш счёт ").Append(depositOn.AccountNumber)
-            .Append("пополнен на ")
+            .Append(" пополнен на ")
             .Append(depositOn.Amount).Append(' ').Append(depositOn.CurrencyCode);
 
         var notification = new NotificationDataBase(
